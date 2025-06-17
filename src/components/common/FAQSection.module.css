@@ -1,0 +1,193 @@
+/* src/components/common/FAQSection.module.css */
+
+/* --- General Section Styling --- */
+.faqSection {
+  width: 100%;
+  max-width: 1440px; /* Aligns with your Figma width */
+  margin: 0 auto; /* Center the section */
+  padding: 40px 10px; /* Responsive padding */
+  background-color: #F7F7F7;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.loadingMessage,
+.errorMessage {
+  text-align: center;
+  padding: 50px 0;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.errorMessage {
+  color: red;
+}
+
+/* --- FAQ Header (Title Box) --- */
+.faqHeader {
+  width: clamp(200px, 20vw, 252px); /* Responsive width */
+  height: clamp(60px, 7vw, 87px); /* Responsive height */
+  margin-left: clamp(20px, 7vw, 100px); /* Responsive left margin */
+  margin-top: clamp(20px, 3vw, 42px); /* Responsive top margin */
+  background: rgba(18, 73, 112, 0.20);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Include padding in width/height */
+}
+
+.faqTitle {
+  color: #124970;
+  font-size: clamp(30px, 4vw, 48px); /* Responsive font size */
+  font-family: 'Inter', sans-serif; /* Fallback to sans-serif */
+  font-weight: 500;
+  margin: 0; /* Remove default heading margin */
+}
+
+/* --- FAQ List Container --- */
+.faqList {
+  width: 100%;
+  max-width: 1242px; /* Figma width for the list */
+  margin: 35px auto 0; /* Gap from header, center list */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between accordion items */
+}
+
+/* --- Individual FAQ Item --- */
+.faqItem {
+  background-color: #f7f7f7; /* Background for individual item */
+  border-bottom: 1px solid rgba(18, 73, 112, 0.2); /* Separator */
+  overflow: hidden; /* Crucial for hiding collapsed content */
+  border-radius: 16px;
+}
+
+.faqQuestionButton {
+  width: 100%;
+  background: rgba(18, 73, 112, 0.60); /* Figma background for question bar */
+  color: white;
+  padding: 20px 60px 20px 25px; /* Adjust padding for arrow */
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(18px, 2.5vw, 28px); /* Responsive font size */
+  font-family: 'Outfit', sans-serif; /* Fallback */
+  font-weight: 600;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  position: relative; /* For accessibility focus outline */
+}
+
+.faqQuestionButton:hover {
+  background-color: rgba(18, 73, 112, 0.8); /* Slightly darker on hover */
+}
+
+.faqQuestionButton:focus-visible {
+  outline: 2px solid #007bff; /* Clear focus indicator */
+  outline-offset: 2px;
+}
+
+.questionText {
+  flex-grow: 1; /* Allows text to take available space */
+  padding-right: 15px; /* Space for arrow */
+}
+
+.arrowIcon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white; /* Downward pointing arrow */
+  transition: transform 0.3s ease;
+  flex-shrink: 0; /* Prevent arrow from shrinking */
+}
+
+.arrowIcon.arrowUp {
+  transform: rotate(180deg); /* Rotate 180 degrees when open */
+}
+
+.faqAnswerContainer {
+  background: #124970; /* Figma background for answer content */
+  color: white;
+  max-height: 0; /* Initially collapsed */
+  overflow: hidden; /* Hide overflow when collapsed */
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth transition for height and padding */
+}
+
+.faqAnswerContainer.open {
+  max-height: 500px; /* Large enough value to contain most answers. Adjust if needed. */
+  padding: 25px 55px; /* Apply padding when open */
+  /* If content is very long, consider scroll or a much larger max-height */
+}
+
+.faqAnswerContent {
+  font-size: clamp(1rem, 2vw, 1.3rem); /* Responsive font size for answer */
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400; /* Regular weight for text */
+  line-height: 1.5;
+  /* Ensure paragraph tags inside rich text get proper spacing */
+}
+
+.faqAnswerContent p:not(:last-child) {
+    margin-bottom: 1em; /* Add space between paragraphs from rich text */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .faqSection {
+    padding: 30px 15px;
+  }
+
+  .faqHeader {
+    margin-left: 15px; /* Smaller margin for smaller screens */
+    width: clamp(180px, 30vw, 220px);
+    height: clamp(50px, 8vw, 70px);
+  }
+
+  .faqTitle {
+    font-size: clamp(24px, 5vw, 38px);
+  }
+
+  .faqList {
+    margin-top: 25px;
+    gap: 15px;
+  }
+
+  .faqQuestionButton {
+    padding: 15px 40px 15px 20px; /* Adjust padding */
+    font-size: clamp(16px, 3vw, 24px);
+  }
+
+  .arrowIcon {
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-top-width: 6px;
+  }
+
+  .faqAnswerContainer.open {
+    padding: 20px 25px; /* Smaller padding when open */
+  }
+
+  .faqAnswerContent {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .faqHeader {
+    margin-left: 10px;
+  }
+  .faqTitle {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+  .faqQuestionButton {
+    padding: 12px 30px 12px 15px;
+    font-size: clamp(14px, 3.5vw, 20px);
+  }
+  .faqAnswerContainer.open {
+    padding: 15px 15px;
+  }
+}

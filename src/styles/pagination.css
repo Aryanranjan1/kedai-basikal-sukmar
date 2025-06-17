@@ -1,0 +1,68 @@
+/* src/styles/pagination.css */
+
+.pagination-container {
+  display: flex; /* Makes items display in a row */
+  list-style: none; /* Removes bullet points */
+  padding: 20px 0;
+  justify-content: center; /* Centers the pagination items horizontally */
+  margin-top: 30px;
+  gap: 10px; /* Provides spacing between pagination items */
+  flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens */
+  align-items: center; /* Vertically aligns items (Previous, numbers, Next) if they have different heights */
+}
+
+/* Styles for individual page items */
+.page-item {
+  /* No margin needed here if using gap on the container */
+  font-size: 16px;
+  min-width: 30px; /* Give a minimum width for consistent button size */
+  text-align: center; /* Center text within the page item */
+}
+
+.page-link {
+  display: block; /* Ensures padding and border apply correctly */
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #124970; /* Your primary color */
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #e0e0e0;
+}
+
+.active-page .page-link {
+  background-color: #124970; /* Your primary color */
+  color: white;
+  border-color: #124970;
+}
+
+/* Styles for previous/next buttons */
+.previous.page-item .page-link,
+.next.page-item .page-link {
+    font-weight: 600; /* Make Previous/Next text bolder */
+    padding: 8px 15px; /* Slightly more padding for Previous/Next */
+}
+
+.break-me {
+  cursor: default;
+}
+
+/* Style for the '...' link */
+.break-me .page-link {
+    border: none; /* Remove border for the break element */
+    background: transparent; /* Transparent background */
+    cursor: default; /* Default cursor for '...' */
+}
+
+/* Hide previous/next/break buttons when disabled (optional) */
+.disabled .page-link {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #f0f0f0; /* Light background for disabled state */
+  color: #a0a0a0; /* Lighter text for disabled state */
+  border-color: #e0e0e0;
+}

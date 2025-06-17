@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true, // This is correctly set
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -22,6 +22,16 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",  // <--- ADDED THIS for any plain JS files
+    "**/*.jsx", // <--- ADDED THIS for any plain JSX files (e.g., ScalingContainer.jsx)
+    "**/*.json", // <--- ADDED THIS to include all JSON files, including data.json
+    ".next/types/**/*.ts"
+    // You can remove "src/components/common/Footer.tsx" and "src/components/ScalingContainer.jsx"
+    // as "**/*.tsx" and "**/*.jsx" will now cover them.
+  ],
   "exclude": ["node_modules"]
 }

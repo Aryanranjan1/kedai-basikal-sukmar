@@ -1,0 +1,667 @@
+{
+  "banners": [
+    {
+      "id": 1,
+      "attributes": {
+        "title": "Banner 1 - Explore Our Bikes",
+        "description": "High-quality bicycles for every adventure.",
+        "imageUrl": "/images/banner/1.png",
+        "linkUrl": "/bicycle",
+        "altText": "Sleek modern bicycle on a scenic road."
+      }
+    },
+    {
+      "id": 2,
+      "attributes": {
+        "title": "Banner 2 - City Cycling",
+        "description": "Perfect bikes for urban commutes.",
+        "imageUrl": "/images/banner/2.png",
+        "linkUrl": "/bicycle",
+        "altText": "Person cycling through a city park."
+      }
+    },
+    {
+      "id": 3,
+      "attributes": {
+        "title": "Banner 3 - Off-Road Adventures",
+        "description": "Durable mountain bikes for rugged trails.",
+        "imageUrl": "/images/banner/3.png",
+        "linkUrl": "/bicycle",
+        "altText": "Mountain bike on a dirt trail with mountains in background."
+      }
+    },
+    {
+      "id": 4,
+      "attributes": {
+        "title": "Banner 4 - Family Fun Rides",
+        "description": "Bicycles for all ages.",
+        "description": "Bicycles for all ages.",
+        "imageUrl": "/images/banner/4.png",
+        "linkUrl": "/bicycle",
+        "altText": "Happy family riding bicycles together."
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "attributes": {
+        "productName": "Mountain X1 Pro",
+        "description": "A high-performance mountain bike designed for challenging terrains.",
+        "price": 1200.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/1.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "mountain-x1-pro",
+        "brand": "TrailBlazer",
+        "color": "Green",
+        "ageRange": "12+",
+        "gender": "Unisex",
+        "height": "Medium",
+        "type": "Mountain Bike",
+        "rating": 4.8,
+        "detailedDescription": "The Mountain X1 Pro features a lightweight aluminum frame, 27-speed Shimano gears, and hydraulic disc brakes for superior control on steep descents. Its front suspension fork with 120mm travel absorbs shocks for a smoother ride. Perfect for competitive riders and serious enthusiasts.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/2.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/3.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/4.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Aluminum Alloy",
+          "Fork": "120mm Suspension",
+          "Brakes": "Shimano Hydraulic Disc",
+          "Gears": "27-Speed Shimano Deore",
+          "Wheel Size": "29 inches"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "attributes": {
+        "productName": "City Commuter Lite",
+        "description": "Lightweight and agile, perfect for daily urban commuting.",
+        "price": 650.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/1.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "city-commuter-lite",
+        "brand": "UrbanGlide",
+        "color": "Blue",
+        "ageRange": "16+",
+        "gender": "Unisex",
+        "height": "Medium",
+        "type": "City Bike",
+        "rating": 4.5,
+        "detailedDescription": "Navigate city streets with ease on the City Commuter Lite. Its upright riding position and comfortable saddle make it ideal for daily rides to work or casual weekend excursions. Comes with fenders and a rear rack for practicality.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/5.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/1.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/6.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Steel",
+          "Gears": "7-Speed Shimano",
+          "Brakes": "V-Brakes",
+          "Features": "Fenders, Rear Rack"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "attributes": {
+        "productName": "Kids' Adventurer 20",
+        "description": "A fun and safe bike for young explorers, 20-inch wheels.",
+        "price": 250.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/2.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "kids-adventurer-20",
+        "brand": "LittleRiders",
+        "color": "Red",
+        "ageRange": "6-9",
+        "gender": "Male",
+        "height": "Small",
+        "type": "Kids Bike",
+        "rating": 4.7,
+        "detailedDescription": "The Kids' Adventurer 20 is built with safety and fun in mind. Featuring easy-to-use coaster brakes and a durable frame, it's perfect for teaching kids how to ride and explore their neighborhood. Adjustable seat height ensures a comfortable fit as they grow.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/7.jpeg" } } },
+          { "data": { "attributes": { "url": "/images/product/8.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/2.webp" } } }
+        ],
+        "specifications": {
+          "Wheel Size": "20 inches",
+          "Brakes": "Coaster and Hand Brakes",
+          "Frame Material": "Steel",
+          "Recommended Age": "6-9 years"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "attributes": {
+        "productName": "Road Race 5000",
+        "description": "Aerodynamic design for speed and performance on the road.",
+        "price": 1800.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/3.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "road-race-5000",
+        "brand": "Speedster",
+        "color": "Black",
+        "ageRange": "18+",
+        "gender": "Unisex",
+        "height": "Large",
+        "type": "Road Bike",
+        "rating": 4.9,
+        "detailedDescription": "The Road Race 5000 is engineered for competitive cycling and long-distance rides. Its carbon fiber frame minimizes weight, while the 22-speed SRAM Force groupset provides precise and rapid gear changes. Integrated cables give it a clean, aerodynamic look.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/9.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/4.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/10.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Carbon Fiber",
+          "Gears": "22-Speed SRAM Force",
+          "Brakes": "Rim Brakes",
+          "Weight": "7.5 kg"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "attributes": {
+        "productName": "Hybrid Cruiser",
+        "description": "Comfortable and versatile, ideal for light trails and road use.",
+        "price": 750.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/5.webp"
+            }
+          }
+        },
+        "isPopular": false,
+        "slug": "hybrid-cruiser",
+        "brand": "CommuterX",
+        "color": "White",
+        "ageRange": "16+",
+        "gender": "Female",
+        "height": "Medium",
+        "type": "Hybrid Bike",
+        "rating": 4.3,
+        "detailedDescription": "Enjoy a smooth ride with the Hybrid Cruiser. Its wider tires offer better grip and comfort on varied surfaces, while the suspension seat post absorbs road vibrations. A perfect choice for leisurely rides and fitness.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/1.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/6.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/13.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Aluminum",
+          "Gears": "21-Speed Shimano",
+          "Brakes": "V-Brakes",
+          "Suspension": "Front Fork"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "attributes": {
+        "productName": "Electric City X",
+        "description": "Powerful electric assist for effortless city travel.",
+        "price": 2500.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/6.webp"
+            }
+          }
+        },
+        "isPopular": false,
+        "slug": "electric-city-x",
+        "brand": "E-Ride",
+        "color": "Grey",
+        "ageRange": "18+",
+        "gender": "Unisex",
+        "height": "Large",
+        "type": "E-Bike",
+        "rating": 4.6,
+        "detailedDescription": "Conquer hills and long distances with the Electric City X. Its integrated battery and powerful motor provide pedal assist up to 28 mph, making your commute faster and more enjoyable. Includes bright lights and robust tires for safety.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/13.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/12.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/5.webp" } } }
+        ],
+        "specifications": {
+          "Motor Power": "500W",
+          "Battery Range": "Up to 50 miles",
+          "Top Speed": "28 mph (assist)",
+          "Frame Material": "Aluminum"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "attributes": {
+        "productName": "Fat Tire Explorer",
+        "description": "Dominate any terrain with this robust fat tire bike.",
+        "price": 950.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/7.jpeg"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "fat-tire-explorer",
+        "brand": "AllTerrain",
+        "color": "Orange",
+        "ageRange": "16+",
+        "gender": "Unisex",
+        "height": "Large",
+        "type": "Fat Bike",
+        "rating": 4.4,
+        "detailedDescription": "The Fat Tire Explorer is built for ultimate traction and stability on sand, snow, or mud. Its oversized tires provide incredible float and grip, making it a true all-season adventure machine.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/15.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/7.jpeg" } } },
+          { "data": { "attributes": { "url": "/images/product/14.webp" } } }
+        ],
+        "specifications": {
+          "Wheel Size": "26x4.0 inches",
+          "Frame Material": "Steel",
+          "Gears": "9-Speed Shimano",
+          "Brakes": "Mechanical Disc"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "attributes": {
+        "productName": "Kids' Balance Buddy",
+        "description": "Perfect first bike for toddlers to learn balance.",
+        "price": 120.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/8.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "kids-balance-buddy",
+        "brand": "MiniCycle",
+        "color": "Yellow",
+        "ageRange": "2-4",
+        "gender": "Unisex",
+        "height": "Extra Small",
+        "type": "Kids Bike",
+        "rating": 4.9,
+        "detailedDescription": "The Kids' Balance Buddy is designed to help young children develop crucial balancing skills before transitioning to pedal bikes. Lightweight and easy to maneuver, it provides a safe and fun introduction to cycling.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/8.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/2.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/3.webp" } } }
+        ],
+        "specifications": {
+          "Wheel Size": "12 inches",
+          "Frame Material": "Aluminum",
+          "Brakes": "None (foot braking)"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "attributes": {
+        "productName": "Folding Commuter",
+        "description": "Compact and portable for mixed-mode commutes.",
+        "price": 880.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/9.webp"
+            }
+          }
+        },
+        "isPopular": false,
+        "slug": "folding-commuter",
+        "brand": "FoldAway",
+        "color": "Silver",
+        "ageRange": "18+",
+        "gender": "Unisex",
+        "height": "Medium",
+        "type": "Folding Bike",
+        "rating": 4.2,
+        "detailedDescription": "The Folding Commuter offers ultimate convenience for urban dwellers. It folds down quickly to fit on public transport or in small apartments. Despite its compact size, it offers a smooth and stable ride.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/9.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/10.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/11.webp" } } }
+        ],
+        "specifications": {
+          "Folded Dimensions": "30x25x15 inches",
+          "Frame Material": "Aluminum",
+          "Gears": "8-Speed Shimano",
+          "Brakes": "V-Brakes"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "attributes": {
+        "productName": "Touring Pro 700",
+        "description": "Built for long-distance adventures and carrying gear.",
+        "price": 1450.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/10.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "touring-pro-700",
+        "brand": "Vagabond",
+        "color": "Brown",
+        "ageRange": "18+",
+        "gender": "Unisex",
+        "height": "Large",
+        "type": "Touring Bike",
+        "rating": 4.7,
+        "detailedDescription": "Embark on epic journeys with the Touring Pro 700. Its robust steel frame, multiple mounting points for racks, and comfortable geometry make it perfect for carrying heavy loads over long distances. Reliable and durable.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/10.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/1.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/15.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Steel",
+          "Gears": "30-Speed Shimano Deore",
+          "Brakes": "Disc Brakes",
+          "Wheel Size": "700c"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "attributes": {
+        "productName": "BMX Freestyle",
+        "description": "Durable and agile for tricks and stunts.",
+        "price": 450.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/11.webp"
+            }
+          }
+        },
+        "isPopular": false,
+        "slug": "bmx-freestyle",
+        "brand": "StuntRider",
+        "color": "Purple",
+        "ageRange": "8+",
+        "gender": "Unisex",
+        "height": "Small",
+        "type": "BMX Bike",
+        "rating": 4.1,
+        "detailedDescription": "The BMX Freestyle is built to withstand the demands of tricks and jumps. Its sturdy frame and responsive geometry make it an ideal choice for skate parks and street riding. Features strong pegs for grinding.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/11.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/12.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/13.webp" } } }
+        ],
+        "specifications": {
+          "Wheel Size": "20 inches",
+          "Frame Material": "Chromoly Steel",
+          "Brakes": "U-Brakes",
+          "Pegs": "Included"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "attributes": {
+        "productName": "Electric Mountain Pro",
+        "description": "Conquer mountains with powerful electric assistance.",
+        "price": 2800.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/12.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "electric-mountain-pro",
+        "brand": "E-Trail",
+        "color": "Black",
+        "ageRange": "16+",
+        "gender": "Unisex",
+        "height": "Large",
+        "type": "E-Bike",
+        "rating": 4.8,
+        "detailedDescription": "Experience new heights with the Electric Mountain Pro. Its powerful motor and long-lasting battery make climbing effortless, while full suspension ensures comfort on the roughest descents. Dominate any trail.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/12.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/14.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/6.webp" } } }
+        ],
+        "specifications": {
+          "Motor Power": "750W",
+          "Battery Range": "Up to 60 miles",
+          "Suspension": "Full Suspension",
+          "Brakes": "Hydraulic Disc"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "attributes": {
+        "productName": "Vintage City Bike",
+        "description": "Classic style with modern comfort for leisurely rides.",
+        "price": 580.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/13.webp"
+            }
+          }
+        },
+        "isPopular": false,
+        "slug": "vintage-city-bike",
+        "brand": "RetroCycle",
+        "color": "Cream",
+        "ageRange": "16+",
+        "gender": "Unisex",
+        "height": "Medium",
+        "type": "City Bike",
+        "rating": 4.0,
+        "detailedDescription": "Ride in style with the Vintage City Bike. Its timeless design, comfortable spring saddle, and swept-back handlebars provide a relaxed and enjoyable riding experience. Perfect for a casual spin around town.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/13.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/1.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/5.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Steel",
+          "Gears": "3-Speed Internal Hub",
+          "Brakes": "Rim Brakes",
+          "Features": "Basket Mounts"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "attributes": {
+        "productName": "Junior Mountain Scout",
+        "description": "Rugged and ready for young adventurers, 24-inch wheels.",
+        "price": 380.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/14.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "junior-mountain-scout",
+        "brand": "TrailBlazer",
+        "color": "Blue",
+        "ageRange": "9-12",
+        "gender": "Male",
+        "height": "Small-Medium",
+        "type": "Kids Bike",
+        "rating": 4.6,
+        "detailedDescription": "The Junior Mountain Scout is a capable off-road bike for older kids. With front suspension and multi-speed gears, it's ready to hit the trails or explore dirt paths with confidence. Durable construction for active use.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/14.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/2.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/7.jpeg" } } }
+        ],
+        "specifications": {
+          "Wheel Size": "24 inches",
+          "Frame Material": "Aluminum",
+          "Gears": "7-Speed Shimano",
+          "Brakes": "V-Brakes",
+          "Suspension": "Front Suspension"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "attributes": {
+        "productName": "Gravel Grinder Pro",
+        "description": "Versatile bike for road, gravel, and light off-road paths.",
+        "price": 1600.00,
+        "productImage": {
+          "data": {
+            "attributes": {
+              "url": "/images/product/15.webp"
+            }
+          }
+        },
+        "isPopular": true,
+        "slug": "gravel-grinder-pro",
+        "brand": "AdventureWorks",
+        "color": "Green",
+        "ageRange": "18+",
+        "gender": "Unisex",
+        "height": "Medium",
+        "type": "Gravel Bike",
+        "rating": 4.7,
+        "detailedDescription": "The Gravel Grinder Pro combines the speed of a road bike with the robustness of a mountain bike. Its wider tires and comfortable geometry make it perfect for long rides across varied surfaces, from smooth asphalt to loose gravel.",
+        "galleryImages": [
+          { "data": { "attributes": { "url": "/images/product/15.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/3.webp" } } },
+          { "data": { "attributes": { "url": "/images/product/10.webp" } } }
+        ],
+        "specifications": {
+          "Frame Material": "Carbon Fiber",
+          "Gears": "11-Speed SRAM Rival",
+          "Brakes": "Hydraulic Disc",
+          "Tire Clearance": "Up to 45mm"
+        }
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "attributes": {
+        "name": "Mountain Bikes",
+        "slug": "mountain-bikes"
+      }
+    },
+    {
+      "id": 2,
+      "attributes": {
+        "name": "City Bikes",
+        "slug": "city-bikes"
+      }
+    },
+    {
+      "id": 3,
+      "attributes": {
+        "name": "Kids Bikes",
+        "slug": "kids-bikes"
+      }
+    },
+    {
+      "id": 4,
+      "attributes": {
+        "name": "Road Bikes",
+        "slug": "road-bikes"
+      }
+    },
+    {
+      "id": 5,
+      "attributes": {
+        "name": "Hybrid Bikes",
+        "slug": "hybrid-bikes"
+      }
+    },
+    {
+      "id": 6,
+      "attributes": {
+        "name": "E-Bikes",
+        "slug": "e-bikes"
+      }
+    },
+    {
+      "id": 7,
+      "attributes": {
+        "name": "Fat Bikes",
+        "slug": "fat-bikes"
+      }
+    },
+    {
+      "id": 8,
+      "attributes": {
+        "name": "Folding Bikes",
+        "slug": "folding-bikes"
+      }
+    },
+    {
+      "id": 9,
+      "attributes": {
+        "name": "Touring Bikes",
+        "slug": "touring-bikes"
+      }
+    },
+    {
+      "id": 10,
+      "attributes": {
+        "name": "BMX Bikes",
+        "slug": "bmx-bikes"
+      }
+    },
+    {
+      "id": 11,
+      "attributes": {
+        "name": "Gravel Bikes",
+        "slug": "gravel-bikes"
+      }
+    }
+  ]
+}

@@ -1,26 +1,76 @@
+/* src/app/globals.css */
+
+/*
+  Tailwind CSS v4 Imports:
+  - `@import "tailwindcss/preflight";` provides the modern base styles (replaces @tailwind base).
+  - `@tailwind utilities;` provides all utility classes (replaces @tailwind components and @tailwind utilities).
+*/
 @import "tailwindcss";
+@tailwind utilities;
 
+/* --- Custom Font: RU Serius --- */
+/* Ensure your font file path is correct relative to your project root */
+@font-face {
+  font-family: 'RU Serius';
+  src: url('/font/RUSerius-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Recommended for better user experience */
+}
+
+/* --- Font Integration with next/font (Outfit) --- */
+/* Applies the Outfit font variable as the default font for your application. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  font-family: var(--font-outfit), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- Base HTML/Body Styles --- */
+/*
+  These are standard, non-disruptive base styles to ensure your page
+  behaves predictably and takes full viewport height.
+  - `height: 100%` on both `html` and `body` is crucial for layouts that need to stretch vertically.
+  - `overflow-x: hidden` on `html` is a common safeguard against unexpected horizontal scrollbars,
+    without interfering with component-level layout that relies on its own internal `overflow`.
+  - `margin: 0`, `padding: 0` remove default browser spacing.
+*/
+html {
+  height: 100%;       /* Ensures html always fills the viewport height */
+  overflow-x: hidden; /* Prevents global horizontal scrollbars */
+  font-family: var(--font-outfit), sans-serif; /* Explicitly set for robustness */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F7F7F7; /* Your specified global background color */
+  height: 100%; /* Ensures body takes full height of html */
+  overflow-y: auto; /* Allows normal vertical scrolling by default */
+  @apply text-gray-900; /* Apply global text color using Tailwind */
 }
+
+/* --- Scroll Management for Loader (THE CORE FIX FOR SCROLL) --- */
+/*
+  This CSS rule is applied to the `<body>` element when the `no-scroll` class is added by `ScrollManager.jsx`.
+  It uses `overflow: hidden !important` to force the scrollbar to disappear and lock the page.
+  This is the successful fix for the scroll issue.
+*/
+body.no-scroll {
+  overflow: hidden !important; /* Forces scroll lock during loading */
+  /* Do NOT add position: fixed, width, top, left here - that breaks layout */
+}
+
+/* --- Essential Image Responsiveness --- */
+/*
+  This ensures all `<img>` elements are responsive by default, scaling down if needed.
+  It's a good global default to prevent images from overflowing their parents.
+*/
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Helps remove unwanted extra space below images */
+}
+
+/*
+  --- Other Global Styles (if you have any) ---
+  Add any other truly global CSS rules below.
+*/

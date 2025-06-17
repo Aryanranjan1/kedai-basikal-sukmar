@@ -1,0 +1,40 @@
+/* src/components/common/BannerCarousel.module.css */
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1920px; /* Or your desired max-width */
+  margin: 0 auto;
+  overflow: hidden;
+  height: 500px; /* Adjust as needed for your banner images */
+  padding-top: 100px; /* This adds 100px space from the top */
+}
+
+/* Ensure these are present for smooth scrolling and image filling */
+.carouselWrapper {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.8s ease-in-out; /* Slightly slower transition for smoothness */
+  height: 100%;
+}
+
+.carouselSlide {
+  flex: 0 0 100%;
+  position: relative;
+  height: 100%;
+  overflow: hidden; /* Important for images that might overflow their slide container */
+}
+
+/* Hide navigation and pagination elements if they exist but are not used */
+.navButton,
+.paginationDots,
+.overlayContent {
+  display: none; /* Explicitly hide elements if you remove them from JSX but keep CSS */
+}
+
+/* ... other base styles like loadingMessage, errorMessage etc. ... */
