@@ -1,5 +1,5 @@
-// src/components/sections/RepairServiceHero.tsx
 import React from 'react';
+import Image from 'next/image'; // Import the Image component
 import ServiceCard from '@/components/common/ServiceCard'; // Ensure this path is correct
 
 export default function RepairServiceHero() {
@@ -37,7 +37,7 @@ export default function RepairServiceHero() {
         />
       </svg>
 
-      {/* --- Original Bicycle Image --- */}
+      {/* --- Original Bicycle Image - Now using Next.js Image component --- */}
       {/* Positioned as per your request */}
       <div
         style={{
@@ -50,13 +50,13 @@ export default function RepairServiceHero() {
           zIndex: 1, // Ensure it's between background and content
         }}
       >
-        <img
+        <Image
           src="/images/cool-bicycle-studio.png" // Ensure this path is correct
           alt="Hero Bicycle"
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
+          fill // Make the image fill its parent div
+          style={{ objectFit: 'cover' }} // Ensure the image covers the area
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Add appropriate sizes prop
+          priority // Consider adding priority if this is an LCP image
         />
       </div>
 
@@ -90,22 +90,22 @@ export default function RepairServiceHero() {
             {/* Service Cards Grid */}
             <div className="grid grid-cols-2 gap-6">
               <ServiceCard
-                icon={<img src="/images/refresh.png" alt="Cart Icon" className="w-6 h-6" />}
+                icon={<Image src="/images/refresh.png" alt="Tyre Repair Icon" width={24} height={24} />}
                 title1="Tyre"
                 title2="Repair"
               />
               <ServiceCard
-                icon={<img src="/images/tools.svg" alt="Repair Icon" className="w-6 h-6" />}
+                icon={<Image src="/images/tools.svg" alt="Break Repair Icon" width={24} height={24} />}
                 title1="Break"
                 title2="Repair"
               />
               <ServiceCard
-                icon={<img src="/images/tyre.png" alt="Delivery Icon" className="w-6 h-6" />}
+                icon={<Image src="/images/tyre.png" alt="Part Change Icon" width={24} height={24} />}
                 title1="Part"
                 title2="Change"
               />
               <ServiceCard
-                icon={<img src="/images/gear.svg" alt="Gear Icon" className="w-6 h-6" />}
+                icon={<Image src="/images/gear.svg" alt="Gear Tuning Icon" width={24} height={24} />}
                 title1="Gear"
                 title2="Tunning"
               />

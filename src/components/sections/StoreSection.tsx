@@ -22,9 +22,9 @@ const StoreSection: React.FC = () => {
     const [products, setProducts] = useState<ProductData[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(0); // 0-indexed for ReactPaginate
     const [pageCount, setPageCount] = useState<number>(0);
-    const [totalProducts, setTotalProducts] = useState<number>(0);
+    const [totalProducts, setTotalProducts] = useState<number>(0); // Kept and will be used
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null); // Kept and will be used
 
     // Keep track of the actual search query being used for filtering
     const [activeSearchQuery, setActiveSearchQuery] = useState(initialSearchQuery);
@@ -76,24 +76,13 @@ const StoreSection: React.FC = () => {
 
     const debouncedFetchProducts = useMemo(
         () =>
-            debounce(async (params: URLSearchParams, page: number) => {
+            debounce(async (params: URLSearchParams) => { // Removed 'page' parameter as it's part of params now
                 setLoading(true);
-                setError(null);
+                setError(null); // Clear previous errors
                 try {
-                    // Temporarily fetch more products if a search query is active
-                    // to allow for client-side relevance sorting across a broader set.
-                    // This is a workaround if the API cannot do complex server-side relevance.
-                    // If your mock API only returns *paginated* results for `fetchProducts`,
-                    // then this will only sort the *current page's* products by relevance.
-                    // For true global relevance, the API would need to return all matches
-                    // or support server-side relevance sorting.
-
-                    // IMPORTANT: The `fetchProducts` function in `strapiMockApi.ts`
-                    // MUST be modified to handle the `searchQuery` param correctly.
-                    // It should return only products that contain *all* keywords.
-
                     const response = await fetchProducts(params);
-                    let fetchedProducts = response.data;
+                    // Changed 'let' to 'const' as 'fetchedProducts' is not reassigned
+                    const fetchedProducts = response.data;
 
                     // Client-side relevance sorting if an active search query is present
                     if (activeSearchQuery) {
@@ -130,9 +119,16 @@ const StoreSection: React.FC = () => {
                     setPageCount(response.meta.pagination.pageCount); // Still rely on API's page count
                     setTotalProducts(response.meta.pagination.total); // Still rely on API's total
 
-                } catch (err: any) {
+                } catch (err: unknown) { // Changed 'any' to 'unknown'
                     console.error("Failed to fetch products:", err);
-                    setError(err.message || 'Failed to fetch products. Please try again.');
+                    // Safely access error message
+                    if (err instanceof Error) {
+                        setError(err.message);
+                    } else if (typeof err === 'string') {
+                        setError(err);
+                    } else {
+                        setError('An unknown error occurred.');
+                    }
                 } finally {
                     setLoading(false);
                 }
@@ -169,7 +165,7 @@ const StoreSection: React.FC = () => {
     // Effect to fetch products when page, filters, sort, or search query changes
     useEffect(() => {
         const params = buildSearchParams();
-        debouncedFetchProducts(params, currentPage);
+        debouncedFetchProducts(params); // Removed 'currentPage' as a separate argument
     }, [currentPage, buildSearchParams, debouncedFetchProducts]);
 
 
@@ -177,9 +173,6 @@ const StoreSection: React.FC = () => {
     useEffect(() => {
         const fetchOptions = async () => {
             try {
-                // Assuming fetchFilterOptions can take a type argument to fetch specific filters
-                // If it returns a single object with all, adjust this part.
-                // Based on previous conversation, it likely returns an object with all options.
                 const options = await fetchFilterOptions(); // Assuming fetchFilterOptions now returns a single object
                 if (typeof options === 'object' && options !== null && !Array.isArray(options)) {
                     setAvailableBrands(options.brands || []);
@@ -308,7 +301,7 @@ const StoreSection: React.FC = () => {
                     {activeSearchQuery && (
                         <div style={{ marginBottom: '16px', padding: '12px', background: '#e2e8f0', borderRadius: '8px' }}>
                             <p style={{ fontWeight: '600', fontSize: '16px', marginBottom: '8px' }}>Active Search:</p>
-                            <span style={{ fontSize: '14px', color: '#4a5568' }}>"{activeSearchQuery}"</span>
+                            <span style={{ fontSize: '14px', color: '#4a5568' }}>&quot;{activeSearchQuery}&quot;</span> {/* Fixed: Escaped double quotes */}
                             <button
                                 onClick={() => {
                                     setActiveSearchQuery(''); // Clear the search query state
@@ -487,7 +480,10 @@ const StoreSection: React.FC = () => {
 
                 {/* Product Display Area */}
                 <div style={{ width: `${productDisplayWidth}px` }}>
-                    <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <p style={{ fontWeight: '500', color: '#2d3748' }}>
+                            {loading ? "Loading..." : `${products.length} of ${totalProducts} products found`}
+                        </p>
                         <label htmlFor="sort-by" style={{ marginRight: '8px', fontWeight: '500', color: '#2d3748' }}>Sort By:</label>
                         <select
                             id="sort-by"
@@ -504,6 +500,7 @@ const StoreSection: React.FC = () => {
                         </select>
                     </div>
 
+                    {/* Conditional Rendering based on loading, error, and products */}
                     {loading ? (
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: `${productCardGap}px` }}>
                             {Array.from({ length: DEFAULT_PAGE_SIZE }).map((_, index) => (
@@ -516,6 +513,10 @@ const StoreSection: React.FC = () => {
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    ) : error ? ( // Display error message if present
+                        <div style={{ textAlign: 'center', fontSize: '18px', color: '#ef4444', padding: '48px 0' }}>
+                            Error: {error}
                         </div>
                     ) : products.length > 0 ? (
                         <>
@@ -557,7 +558,7 @@ const StoreSection: React.FC = () => {
                                 />
                             </div>
                         </>
-                    ) : (
+                    ) : ( // No products found
                         <div style={{ textAlign: 'center', fontSize: '18px', color: '#4a5568', padding: '48px 0' }}>
                             No products found matching your criteria. Try adjusting your filters.
                         </div>

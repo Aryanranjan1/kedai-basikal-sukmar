@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Image from 'next/image'; // Image component is still needed for the main section, not individual cards
+// REMOVED: import Image from 'next/image'; // Image component is no longer directly used in this file
 import { fetchProducts, ProductData } from '../../api/strapiMockApi';
 import ProductCard from '../common/ProductCard'; // Import the shared ProductCard component
 

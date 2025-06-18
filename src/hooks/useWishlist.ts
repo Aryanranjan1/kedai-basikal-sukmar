@@ -1,12 +1,18 @@
 // hooks/useWishlist.ts
 import { useState, useEffect } from 'react';
+import { ProductData } from '../api/strapiMockApi'; // Ensure this path is correct!
 
 const WISHLIST_KEY = 'wishlist';
 
-function getWishlistFromLocalStorage(): any[] {
+function getWishlistFromLocalStorage(): ProductData[] {
   if (typeof window !== 'undefined') {
     const data = localStorage.getItem(WISHLIST_KEY);
-    return data ? JSON.parse(data) : [];
+    try {
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error("Failed to parse wishlist from localStorage:", e);
+      return [];
+    }
   }
   return [];
 }
@@ -16,14 +22,17 @@ export function useWishlistStatus(productId: string) {
 
   useEffect(() => {
     const wishlist = getWishlistFromLocalStorage();
-    setIsWishlisted(wishlist.some(item => item.id === productId));
+    // Ensure both 'item.id' and 'productId' are treated as strings for comparison
+    setIsWishlisted(wishlist.some(item => String(item.id) === String(productId)));
   }, [productId]);
 
-  const toggleWishlist = (product: any) => {
+  const toggleWishlist = (product: ProductData) => {
     const wishlist = getWishlistFromLocalStorage();
-    const isAlreadyInWishlist = wishlist.some(item => item.id === product.id);
+    // Ensure both 'item.id' and 'product.id' are treated as strings for comparison
+    const isAlreadyInWishlist = wishlist.some(item => String(item.id) === String(product.id));
+
     const updatedWishlist = isAlreadyInWishlist
-      ? wishlist.filter(item => item.id !== product.id)
+      ? wishlist.filter(item => String(item.id) !== String(product.id))
       : [...wishlist, product];
 
     localStorage.setItem(WISHLIST_KEY, JSON.stringify(updatedWishlist));
@@ -33,23 +42,24 @@ export function useWishlistStatus(productId: string) {
   return { isWishlisted, toggleWishlist };
 }
 
-// ✅ This hook returns the full list and toggle function (for WishlistSection)
 export default function useWishlist() {
-  const [wishlistItems, setWishlistItems] = useState<any[]>([]);
+  const [wishlistItems, setWishlistItems] = useState<ProductData[]>([]);
 
   useEffect(() => {
     setWishlistItems(getWishlistFromLocalStorage());
   }, []);
 
-  const toggleWishlist = (product: any) => {
-    const current = getWishlistFromLocalStorage();
-    const exists = current.some(item => item.id === product.id);
-    const updated = exists
-      ? current.filter(item => item.id !== product.id)
-      : [...current, product];
+  const toggleWishlist = (product: ProductData) => {
+    const currentWishlist = getWishlistFromLocalStorage();
+    // Ensure both 'item.id' and 'product.id' are treated as strings for comparison
+    const exists = currentWishlist.some(item => String(item.id) === String(product.id));
 
-    localStorage.setItem(WISHLIST_KEY, JSON.stringify(updated));
-    setWishlistItems(updated);
+    const updatedWishlist = exists
+      ? currentWishlist.filter(item => String(item.id) !== String(product.id))
+      : [...currentWishlist, product];
+
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(updatedWishlist));
+    setWishlistItems(updatedWishlist);
   };
 
   return { wishlistItems, toggleWishlist };

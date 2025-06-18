@@ -2,6 +2,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image'; // Import the Image component
 
 const Footer = () => {
   return (
@@ -100,15 +101,33 @@ const Footer = () => {
           <div className="flex space-x-[16px] mt-[16px]">
             {/* Facebook */}
             <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <img src="/images/facebook.svg" alt="Facebook" className="w-[32px] h-[32px] object-contain" />
+              <Image 
+                src="/images/facebook.svg" 
+                alt="Facebook" 
+                width={32} // Explicit width
+                height={32} // Explicit height
+                className="object-contain" 
+              />
             </a>
             {/* Twitter */}
             <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <img src="/images/x.svg" alt="Twitter" className="w-[32px] h-[32px] object-contain" />
+              <Image 
+                src="/images/x.svg" 
+                alt="Twitter" 
+                width={32} // Explicit width
+                height={32} // Explicit height
+                className="object-contain" 
+              />
             </a>
             {/* Instagram */}
             <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <img src="/images/instagram.svg" alt="Instagram" className="w-[32px] h-[32px] object-contain" />
+              <Image 
+                src="/images/instagram.svg" 
+                alt="Instagram" 
+                width={32} // Explicit width
+                height={32} // Explicit height
+                className="object-contain" 
+              />
             </a>
           </div>
         </div>

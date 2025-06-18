@@ -4,8 +4,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-// Corrected import: We import ProductData, and extract ProductImageData from it.
-import type { ProductData } from '@/api/strapiMockApi';
+// Removed unused import: ProductData is not directly used in this component.
+// import type { ProductData } from '@/api/strapiMockApi'; 
 
 // You can define ProductImageData directly here, or extract it from ProductData
 // For simplicity, let's define it based on how it's used:
@@ -67,11 +67,12 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
     };
 
     // Filter out the clicked image from the current thumbnails list
-    let updatedThumbnails = thumbnails.filter(
+    // Changed 'let' to 'const' as 'updatedThumbnails' reference is not reassigned
+    const updatedThumbnails = thumbnails.filter(
       (thumb) => thumb.data?.attributes?.url !== clickedImageUrl
     );
 
-    // Add the old large image to the beginning of the updated thumbnails list
+    // Add the old large image to the beginning of the updated thumbnails list (modifies in-place)
     updatedThumbnails.unshift(oldLargeImage);
 
 

@@ -8,7 +8,7 @@ import BannerCarousel from '@/components/common/BannerCarousel';
 import RecommendedProducts from '@/components/sections/RecommendedProducts';
 import RepairServiceHero from '@/components/sections/RepairServiceHero'; // Your hero component
 import RepairDeliveryPromo from '@/components/sections/RepairDeliveryPromo';
-import Link from 'next/link'; // Import Link for navigation if you plan to use it here
+// REMOVED: import Link from 'next/link'; // This import is not used in the current component
 
 // Banner API import (ensure this path is correct)
 import { fetchBanners } from '@/api/strapiMockApi';

@@ -1,12 +1,13 @@
 // src/app/loading.tsx
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+// REMOVE 'useState' from this import line
+import { useEffect, useRef } from 'react'; 
 import { usePathname } from 'next/navigation';
 import PageLoader from '../components/PageLoader';
-import { useLoader } from '../context/LoaderContext'; // Assuming this context exists and is correct
+import { useLoader } from '../context/LoaderContext';
 
-export default function Loading() { // Name the component "Loading" or "LoadingPage"
+export default function Loading() {
   const { isLoading, setIsLoading } = useLoader();
   const pathname = usePathname();
   const prevPath = useRef(pathname);
@@ -23,7 +24,6 @@ export default function Loading() { // Name the component "Loading" or "LoadingP
   }, [pathname, setIsLoading]);
 
   return (
-    // This component only renders the loader, not the entire HTML document.
     <PageLoader loading={isLoading} />
   );
 }

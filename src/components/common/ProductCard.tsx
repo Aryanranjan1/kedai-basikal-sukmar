@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Image component
 // Import ProductData from your API definitions
 import { ProductData } from '../../api/strapiMockApi'; // <-- Ensure this path is correct
 
@@ -56,15 +57,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           borderRadius: '14px',
         }}
       >
-        <img
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            position: 'absolute',
-          }}
+        {/* Replaced <img> with <Image /> */}
+        <Image
           src={imageUrl}
           alt={productName}
+          fill // Make the image fill its parent div
+          style={{ objectFit: 'cover' }} // Ensure the image covers the area
+          sizes="(max-width: 768px) 100vw, 33vw" // Example sizes, adjust based on your card's responsiveness
+          quality={75} // Optional: Adjust image quality
         />
       </div>
 

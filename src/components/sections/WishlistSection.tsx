@@ -3,6 +3,8 @@
 import React from 'react';
 import useWishlist from '@/hooks/useWishlist';
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Image component
+import { ProductData } from '../../api/strapiMockApi'; // Assuming ProductData is defined here
 
 const WishlistSection = () => {
   const { wishlistItems, toggleWishlist } = useWishlist();
@@ -22,25 +24,25 @@ const WishlistSection = () => {
       
       {/* Fixed layout with no responsiveness */}
       <div className="flex flex-wrap gap-6 justify-start">
-        {wishlistItems.map((product: any) => {
-          const image =
-            typeof product?.attributes?.productImage === 'object' &&
-            product.attributes.productImage !== null &&
-            'url' in product.attributes.productImage &&
-            typeof product.attributes.productImage.url === 'string'
-              ? product.attributes.productImage.url
-              : '/images/fallback.png';
-
+        {/* Fixed: Used ProductData type instead of any */}
+        {wishlistItems.map((product: ProductData) => {
+          // Access product.attributes.productImage.data.attributes.url for the actual image URL
+          const imageUrl = product.attributes?.productImage?.data?.attributes?.url || '/images/fallback.png';
+          
           return (
             <div
               key={product.id}
               className="w-[280px] bg-white border border-gray-200 rounded-lg shadow p-4 flex flex-col"
             >
               <Link href={`/bicycles/${product.id}`}>
-                <img
-                  src={image}
+                {/* Replaced <img> with <Image /> */}
+                <Image
+                  src={imageUrl}
                   alt={product.attributes.productName}
-                  className="w-full h-48 object-cover rounded mb-3"
+                  // Set explicit width and height based on the parent's fixed width and original image height
+                  width={280} // The container width
+                  height={192} // h-48 means 12 * 16px = 192px
+                  className="w-full h-48 object-cover rounded mb-3" // Keep Tailwind classes for styling
                 />
                 <h3 className="text-xl font-semibold mb-1">
                   {product.attributes.productName}

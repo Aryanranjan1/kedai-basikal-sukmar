@@ -73,6 +73,30 @@ export interface StrapiResponse<T> {
     };
 }
 
+// --- NEW INTERFACE FOR ALL_OPTIONS (for fetchFilterOptions) ---
+// This explicitly types the structure of the filter options object.
+interface AllFilterOptions {
+    brands: string[];
+    colors: string[];
+    ageRanges: string[];
+    genders: string[];
+    heights: string[];
+    types: string[];
+    // Add an index signature to make it assignable to { [key: string]: string[] }
+    [key: string]: string[]; 
+}
+
+// --- NEW INTERFACE FOR MUTABLE MOCK DATA (for saveBanners) ---
+// This allows TypeScript to understand that the 'banners' property of mockData
+// can be reassigned, which is necessary for our mock API's in-memory "database".
+interface MutableMockData {
+    products?: unknown[]; // Or ProductData[], depending on full mockData type
+    banners: BannerData[]; // Allow this property to be mutable
+    categories?: unknown[]; // Or CategoryData[]
+    // Add other top-level properties of mockData.json if they exist and need to be mutable
+}
+
+
 // --- FETCH FUNCTIONS ---
 
 export const fetchProducts = async (params: URLSearchParams = new URLSearchParams()): Promise<StrapiResponse<ProductData>> => {
@@ -169,8 +193,10 @@ export const fetchProducts = async (params: URLSearchParams = new URLSearchParam
     if (sortParam && !searchQuery) { // Do not apply API sort if search query is active
         const [sortField, sortDirection] = sortParam.split(':');
         filteredProducts.sort((a, b) => {
-            const fieldA = a.attributes[sortField as keyof ProductAttribute] as any;
-            const fieldB = b.attributes[sortField as keyof ProductAttribute] as any;
+            // FIX: Replaced 'any' with a union of possible attribute types for sorting
+            // Based on ProductAttribute, potential sortable types are string, number, boolean.
+            const fieldA = a.attributes[sortField as keyof ProductAttribute] as string | number | boolean;
+            const fieldB = b.attributes[sortField as keyof ProductAttribute] as string | number | boolean;
 
             if (typeof fieldA === 'number' && typeof fieldB === 'number') {
                 return sortDirection === 'asc' ? fieldA - fieldB : fieldB - fieldA;
@@ -178,7 +204,15 @@ export const fetchProducts = async (params: URLSearchParams = new URLSearchParam
             if (typeof fieldA === 'string' && typeof fieldB === 'string') {
                 return sortDirection === 'asc' ? fieldA.localeCompare(fieldB) : fieldB.localeCompare(fieldA);
             }
-            return 0;
+            // Added handling for boolean sorting, assuming false comes before true for 'asc'
+            if (typeof fieldA === 'boolean' && typeof fieldB === 'boolean') {
+                if (sortDirection === 'asc') {
+                    return (fieldA === fieldB) ? 0 : (fieldA ? 1 : -1);
+                } else {
+                    return (fieldA === fieldB) ? 0 : (fieldA ? -1 : 1);
+                }
+            }
+            return 0; // Fallback if types don't match or are not comparable
         });
         console.log(`5. Products sorted by (API): ${sortField} ${sortDirection}`);
     } else if (searchQuery) {
@@ -193,8 +227,8 @@ export const fetchProducts = async (params: URLSearchParams = new URLSearchParam
 
     // --- DEBUGGING: PAGINATION PARAMETERS ---
     console.log("6. Pagination Parameters:");
-    console.log(`    - Requested pageSize: ${params.get('pagination[pageSize]')} (parsed: ${pageSize})`);
-    console.log(`    - Requested page: ${params.get('pagination[page]')} (parsed: ${page})`);
+    console.log(`     - Requested pageSize: ${params.get('pagination[pageSize]')} (parsed: ${pageSize})`);
+    console.log(`     - Requested page: ${params.get('pagination[page]')} (parsed: ${page})`);
 
 
     const startIndex = (page - 1) * pageSize;
@@ -203,11 +237,11 @@ export const fetchProducts = async (params: URLSearchParams = new URLSearchParam
 
     // --- DEBUGGING: FINAL SLICE RESULT ---
     console.log("7. Pagination Calculation:");
-    console.log(`    - Calculated startIndex: ${startIndex}`);
-    console.log(`    - Calculated endIndex: ${endIndex}`);
-    console.log(`    - Final products count AFTER pagination slicing: ${paginatedProducts.length}`);
-    console.log(`    - Total products for pageCount calculation (filtered and sorted by API if no search): ${filteredProducts.length}`);
-    console.log(`    - Calculated pageCount: ${Math.ceil(filteredProducts.length / pageSize)}`);
+    console.log(`     - Calculated startIndex: ${startIndex}`);
+    console.log(`     - Calculated endIndex: ${endIndex}`);
+    console.log(`     - Final products count AFTER pagination slicing: ${paginatedProducts.length}`);
+    console.log(`     - Total products for pageCount calculation (filtered and sorted by API if no search): ${filteredProducts.length}`);
+    console.log(`     - Calculated pageCount: ${Math.ceil(filteredProducts.length / pageSize)}`);
     console.log("--- End fetchProducts Debugging Trace ---");
 
 
@@ -294,7 +328,7 @@ export const fetchFilterOptions = async (filterType?: string): Promise<string[] 
         return Array.from(new Set(values as string[])).sort();
     };
 
-    const allOptions = {
+    const allOptions: AllFilterOptions = { // FIX: Explicitly type allOptions here
         brands: extractUniqueValues('brand'),
         colors: extractUniqueValues('color'),
         ageRanges: extractUniqueValues('ageRange'),
@@ -304,7 +338,8 @@ export const fetchFilterOptions = async (filterType?: string): Promise<string[] 
     };
 
     if (filterType && allOptions.hasOwnProperty(filterType)) {
-        return (allOptions as any)[filterType] || [];
+        // FIX: Assert filterType as a key of AllFilterOptions to remove 'any'
+        return (allOptions as AllFilterOptions)[filterType as keyof AllFilterOptions] || [];
     }
 
     return allOptions;
@@ -357,10 +392,11 @@ export const updateContactEmail = async (newEmail: string): Promise<string> => {
 };
 
 export const saveBanners = async (newBanners: BannerData[]): Promise<BannerData[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      (mockData as any).banners = newBanners;
-      resolve(newBanners);
-    }, 300);
-  });
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            // FIX: Assert mockData to a type that allows its 'banners' property to be mutable
+            (mockData as MutableMockData).banners = newBanners;
+            resolve(newBanners);
+        }, 300);
+    });
 };

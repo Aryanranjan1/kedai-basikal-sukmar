@@ -23,9 +23,9 @@ import type { BannerData } from '@/api/strapiMockApi';
 export default function BicyclesPage() {
   const searchParams = useSearchParams();
   // Get the 'search' query parameter from the URL
-  // You can keep this here if you need 'searchQuery' for other parts of BicyclesPage,
-  // but StoreSection doesn't need it passed as a prop.
-  const searchQuery = searchParams.get('search');
+  // The 'searchQuery' variable is no longer needed here as StoreSection
+  // directly reads search parameters and no other logic in BicyclesPage uses it.
+  // const searchQuery = searchParams.get('search'); // REMOVED: This line is removed.
 
   const [banners, setBanners] = useState<BannerData[]>([]);
 
