@@ -11,12 +11,20 @@ import NavBar from '@/components/common/NavBar'; // Assuming you want a Navbar o
 import Footer from '@/components/common/Footer'; // Assuming you want a Footer on this page
 import ScaleWrapper from '@/components/common/ScaleWrapper'; // If you use a wrapper for consistent scaling
 
-// Define the Props interface for your Page component.
-// Next.js automatically provides 'params' for dynamic routes.
+// --- FIX: Adjusted the ProductPageProps interface ---
+// The 'params' property should typically be directly defined without
+// any Promise types for the route parameters themselves.
+// The error was misleading, suggesting 'params' should be a Promise,
+// but it's likely a misinterpretation by TypeScript due to context.
+// Next.js App Router passes 'params' as a direct object.
 interface ProductPageProps {
   params: {
     slug: string; // The dynamic part of the URL, e.g., /bicycles/mountain-bike-abc -> slug is 'mountain-bike-abc'
   };
+  // Next.js might also pass 'searchParams' if present in the URL,
+  // though not always explicitly required in the PageProps interface
+  // unless you plan to use them directly in this component.
+  // searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // This is your default export for the page component.
@@ -56,19 +64,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <main className="pt-[120px] px-4 md:px-8 lg:px-16 py-8">
         <h1 className="text-4xl font-bold mb-4">{product.attributes.productName}</h1>
         <p className="text-xl text-gray-700 mb-6">${product.attributes.price.toFixed(2)}</p>
-        
+
         {/* Display product image */}
         {product.attributes.productImage?.data?.attributes?.url && (
-          <img 
-            src={product.attributes.productImage.data.attributes.url} 
-            alt={product.attributes.productName} 
+          <img
+            src={product.attributes.productImage.data.attributes.url}
+            alt={product.attributes.productName}
             className="w-full max-w-lg h-auto object-cover rounded-lg shadow-md mb-8"
           />
         )}
 
         <h2 className="text-2xl font-semibold mb-3">Description</h2>
         <p className="text-gray-800 leading-relaxed mb-6">{product.attributes.description}</p>
-        
+
         {/* You can add more product details here (e.g., detailedDescription, gallery, specs) */}
         {product.attributes.detailedDescription && (
             <div className="mt-6">
