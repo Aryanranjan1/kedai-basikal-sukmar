@@ -355,3 +355,12 @@ export const updateContactEmail = async (newEmail: string): Promise<string> => {
         }, 300); // Simulate network delay
     });
 };
+
+export const saveBanners = async (newBanners: BannerData[]): Promise<BannerData[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      (mockData as any).banners = newBanners;
+      resolve(newBanners);
+    }, 300);
+  });
+};

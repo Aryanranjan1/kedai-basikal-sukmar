@@ -1,76 +1,56 @@
 /* src/app/globals.css */
 
-/*
-  Tailwind CSS v4 Imports:
-  - `@import "tailwindcss/preflight";` provides the modern base styles (replaces @tailwind base).
-  - `@tailwind utilities;` provides all utility classes (replaces @tailwind components and @tailwind utilities).
-*/
-@import "tailwindcss";
+/* Corrected Tailwind CSS v4 imports */
+@import "tailwindcss"; /* Replaces @tailwind base in v4 */
 @tailwind utilities;
 
-/* --- Custom Font: RU Serius --- */
-/* Ensure your font file path is correct relative to your project root */
-@font-face {
-  font-family: 'RU Serius';
-  src: url('/font/RUSerius-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap; /* Recommended for better user experience */
-}
-
-/* --- Font Integration with next/font (Outfit) --- */
-/* Applies the Outfit font variable as the default font for your application. */
-:root {
-  font-family: var(--font-outfit), sans-serif;
-}
-
-/* --- Base HTML/Body Styles --- */
-/*
-  These are standard, non-disruptive base styles to ensure your page
-  behaves predictably and takes full viewport height.
-  - `height: 100%` on both `html` and `body` is crucial for layouts that need to stretch vertically.
-  - `overflow-x: hidden` on `html` is a common safeguard against unexpected horizontal scrollbars,
-    without interfering with component-level layout that relies on its own internal `overflow`.
-  - `margin: 0`, `padding: 0` remove default browser spacing.
+/* ----------------------------------------------------------------------
+   FIX FOR SCROLLING ISSUE: Ensure HTML and BODY correctly handle height.
+   ----------------------------------------------------------------------
 */
+
+/* src/app/globals.css excerpt */
 html {
-  height: 100%;       /* Ensures html always fills the viewport height */
-  overflow-x: hidden; /* Prevents global horizontal scrollbars */
-  font-family: var(--font-outfit), sans-serif; /* Explicitly set for robustness */
+  height: auto; 
+  min-height: auto; 
+  overflow-x: hidden; 
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #F7F7F7; /* Your specified global background color */
-  height: 100%; /* Ensures body takes full height of html */
-  overflow-y: auto; /* Allows normal vertical scrolling by default */
-  @apply text-gray-900; /* Apply global text color using Tailwind */
+  min-height: 100vh; 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-/* --- Scroll Management for Loader (THE CORE FIX FOR SCROLL) --- */
-/*
-  This CSS rule is applied to the `<body>` element when the `no-scroll` class is added by `ScrollManager.jsx`.
-  It uses `overflow: hidden !important` to force the scrollbar to disappear and lock the page.
-  This is the successful fix for the scroll issue.
+
+/* ----------------------------------------------------------------------
+   IMPORTANT: Update your <main> element in src/app/layout.tsx
+   ----------------------------------------------------------------------
+   With 'body' now being a flex column, you'll likely want your <main>
+   element to grow and take up available space.
+   
+   In src/app/layout.tsx, change your <main> tag to:
+   
+   <main className="w-full flex-grow">
+     {children}
+   </main>
+
+   (You can remove 'min-h-screen' from 'main' now, as 'body' handles the minimum height.)
+*/
+
+
+/* ----------------------------------------------------------------------
+   Other global styles (e.g., for loader or specific components)
+   ----------------------------------------------------------------------
 */
 body.no-scroll {
-  overflow: hidden !important; /* Forces scroll lock during loading */
-  /* Do NOT add position: fixed, width, top, left here - that breaks layout */
+  overflow: hidden !important; /* Use !important for temporary scroll lock, e.g., for modals or loaders */
 }
 
-/* --- Essential Image Responsiveness --- */
-/*
-  This ensures all `<img>` elements are responsive by default, scaling down if needed.
-  It's a good global default to prevent images from overflowing their parents.
+/* If your pagination.css is not imported in layout.tsx, you might
+   need to import it here. Otherwise, leave it as it is.
 */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block; /* Helps remove unwanted extra space below images */
-}
+/* @import "../styles/pagination.css"; */ 
 
-/*
-  --- Other Global Styles (if you have any) ---
-  Add any other truly global CSS rules below.
-*/
+/* Add any other custom global styles below */

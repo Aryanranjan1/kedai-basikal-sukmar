@@ -15,7 +15,6 @@ const NavBar = () => {
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<SVGSVGElement>) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // REDIRECT TO /bicycles page with 'search' query parameter
       router.push(`/bicycles?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
       setIsMobileMenuOpen(false);
@@ -24,7 +23,7 @@ const NavBar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Bicycles', href: '/bicycles' }, // Ensured this link is also /bicycles
+    { name: 'Bicycles', href: '/bicycles' },
     { name: 'Services', href: '/services' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
@@ -81,12 +80,12 @@ const NavBar = () => {
             </button>
           </form>
 
-          {/* CTA */}
+          {/* Wishlist CTA (Desktop) */}
           <Link
-            href="/contact"
+            href="/wishlist"
             className="bg-[#124970] text-white text-xl font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap"
           >
-            Visit Now
+            Wishlist
           </Link>
         </div>
 
@@ -139,13 +138,13 @@ const NavBar = () => {
               </Link>
             ))}
 
-            {/* CTA for Mobile */}
+            {/* Wishlist CTA (Mobile) */}
             <Link
-              href="/contact"
+              href="/wishlist"
               className="mt-4 block text-center bg-[#124970] text-white text-xl font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Visit Now
+              Wishlist
             </Link>
           </div>
         </div>

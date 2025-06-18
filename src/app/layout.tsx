@@ -1,9 +1,12 @@
-// src/app/layout.tsx
-import type { Metadata } from 'next';
+'use client';
+
 import { Outfit } from 'next/font/google';
 import './globals.css';
 import '../styles/pagination.css';
-import ScrollFixer from '../components/common/ScrollFixer'; // Scroll fix component
+import PageLoader from '../components/PageLoader';
+
+import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -11,16 +14,48 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
-export const metadata: Metadata = {
-  title: 'Kedai Basikal Sukmar',
-  description: 'Your premier destination for bicycles and cycling services.',
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const pathname = usePathname();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const isInitialLoadRef = useRef(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Show loader on route change (but not on first load)
+  useEffect(() => {
+    if (isInitialLoadRef.current) {
+      isInitialLoadRef.current = false;
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Fallback max time in case something goes wrong
+    timeoutRef.current = setTimeout(() => {
+      setIsLoading(false);
+      console.warn('Loader auto-dismissed after 5s');
+    }, 5000);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [pathname]);
+
+  // Hide loader immediately after render
+  useEffect(() => {
+    if (isLoading) {
+      const raf = requestAnimationFrame(() => {
+        setIsLoading(false);
+      });
+
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isLoading]);
+
   return (
     <html lang="en">
       <head>
@@ -33,15 +68,11 @@ export default function RootLayout({
           padding: 0,
           overflowX: 'hidden',
           overflowY: 'auto',
-          minHeight: '100vh',
           backgroundColor: '#F7F7F7',
         }}
       >
-        <ScrollFixer />
-
-        <main className="min-h-screen w-full">
-          {children}
-        </main>
+        <PageLoader loading={isLoading} />
+        <main className="min-h-screen w-full">{children}</main>
       </body>
     </html>
   );
