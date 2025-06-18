@@ -11,19 +11,14 @@ import NavBar from '@/components/common/NavBar'; // Assuming you want a Navbar o
 import Footer from '@/components/common/Footer'; // Assuming you want a Footer on this page
 import ScaleWrapper from '@/components/common/ScaleWrapper'; // If you use a wrapper for consistent scaling
 
-// --- FIX: Adjusted the ProductPageProps interface ---
-// The 'params' property should typically be directly defined without
-// any Promise types for the route parameters themselves.
-// The error was misleading, suggesting 'params' should be a Promise,
-// but it's likely a misinterpretation by TypeScript due to context.
-// Next.js App Router passes 'params' as a direct object.
+// --- FIX: Revised ProductPageProps for better compatibility ---
+// This interface defines the expected shape of the props passed to our Page component.
+// Next.js App Router passes 'params' as a direct object for dynamic routes.
 interface ProductPageProps {
   params: {
     slug: string; // The dynamic part of the URL, e.g., /bicycles/mountain-bike-abc -> slug is 'mountain-bike-abc'
   };
-  // Next.js might also pass 'searchParams' if present in the URL,
-  // though not always explicitly required in the PageProps interface
-  // unless you plan to use them directly in this component.
+  // 'searchParams' are optional and also passed as props.
   // searchParams?: { [key: string]: string | string[] | undefined };
 }
 
@@ -118,7 +113,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // This is useful for pre-rendering pages at build time.
 // export async function generateStaticParams() {
 //   // Fetch all slugs from your API
-//   const productsResponse = await fetchProducts(); // Assuming fetchProducts can get all products
+//   // Make sure fetchProducts is defined in strapiMockApi.ts and returns ProductData[]
+//   const productsResponse = await fetchProducts();
 //   const slugs = productsResponse.data.map(product => ({
 //     slug: product.attributes.slug,
 //   }));
