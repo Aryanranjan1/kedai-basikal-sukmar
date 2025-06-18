@@ -2,7 +2,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation'; // Import useSearchParams
+// The 'useSearchParams' import is no longer needed in this file
+// because 'searchParams' is not used directly within BicyclesPage.
+// import { useSearchParams } from 'next/navigation'; 
 
 // --- Common Components ---
 import NavBar from '@/components/common/NavBar';
@@ -12,7 +14,7 @@ import FAQSection from '@/components/common/FAQSection';
 import BannerCarousel from '@/components/common/BannerCarousel';
 
 // --- Page Specific Sections ---
-import StoreSection from '@/components/sections/StoreSection'; // NOTE: Adjusted path for App Router convention if needed
+import StoreSection from '@/components/sections/StoreSection';
 import RecommendedProducts from '@/components/sections/RecommendedProducts';
 import WhyChooseCyclingSection from '@/components/sections/WhyChooseCyclingSection';
 
@@ -21,11 +23,9 @@ import { fetchBanners } from '@/api/strapiMockApi';
 import type { BannerData } from '@/api/strapiMockApi';
 
 export default function BicyclesPage() {
-  const searchParams = useSearchParams();
-  // Get the 'search' query parameter from the URL
-  // The 'searchQuery' variable is no longer needed here as StoreSection
-  // directly reads search parameters and no other logic in BicyclesPage uses it.
-  // const searchQuery = searchParams.get('search'); // REMOVED: This line is removed.
+  // FIX: Removed the declaration of 'searchParams' because it was assigned a value but never used.
+  // The 'StoreSection' component now directly handles reading search parameters from the URL.
+  // const searchParams = useSearchParams(); 
 
   const [banners, setBanners] = useState<BannerData[]>([]);
 
@@ -65,9 +65,8 @@ export default function BicyclesPage() {
 
           {/* StoreSection where products are loaded */}
           <div className="lg:w-full"> {/* Use lg:w-full if no filters section is present */}
-            {/*
-              FIX: Removed the searchQuery prop.
-              StoreSection already reads search parameters from the URL directly.
+            {/* FIX: Removed the searchQuery prop as StoreSection
+              already reads search parameters from the URL directly.
             */}
             <StoreSection />
           </div>
