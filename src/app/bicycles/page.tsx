@@ -23,9 +23,6 @@ import { fetchBanners } from '@/api/strapiMockApi';
 import type { BannerData } from '@/api/strapiMockApi';
 
 export default function BicyclesPage() {
-  // FIX: Removed the declaration of 'searchParams' because it was assigned a value but never used.
-  // The 'StoreSection' component now directly handles reading search parameters from the URL.
-  // const searchParams = useSearchParams(); 
 
   const [banners, setBanners] = useState<BannerData[]>([]);
 
