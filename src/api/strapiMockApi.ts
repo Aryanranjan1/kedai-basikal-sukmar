@@ -32,6 +32,7 @@ export interface ProductAttribute {
 }
 
 export interface ProductData {
+    data: any;
     id: number;
     attributes: ProductAttribute;
 }
