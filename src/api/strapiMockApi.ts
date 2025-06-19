@@ -354,7 +354,7 @@ export const fetchProductBySlug = async (slug: string): Promise<ProductData | nu
 // --- New: API for Contact Email --- 
 // This variable will act as our "database" for the editable email. 
 // In a real application, this would be fetched from/stored in a persistent backend. 
-let CONTACT_EMAIL = 'ashu13112003@gmail.com'; // Default editable email 
+let CONTACT_EMAIL = 'mattheneshanmugam@gmail.com'; // Default editable email 
 
 /** * Simulates fetching the contact email from a backend. 
  * @returns {Promise<string>} The current contact email address. 
