@@ -48,7 +48,7 @@ export async function POST(request: Request) {
 
         // 3. Define the email content
         const mailOptions = {
-            from: senderEmail,             // The fixed sender email (aryanranjan948@gmail.com)
+            from: senderEmail,             // The fixed sender email (mattheneshanmugam@gmail.com)
             to: recipientEmail,            // The recipient email (mattheneshanmugam@gmail.com from mock API)
             subject: `New Contact Message from ${name} - Bike Shop`,
             html: `
