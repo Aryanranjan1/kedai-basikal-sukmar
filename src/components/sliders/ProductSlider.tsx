@@ -1,27 +1,18 @@
-// src/components/products/ProductCarousel.tsx
+// src/components/sliders/ProductSlider.tsx
 'use client'; // This component requires client-side interactivity
 
 import React, { useState, useEffect, useRef } from 'react';
 import ProductCard from '../common/ProductCard'; // Import the ProductCard component
+import { ProductData } from '../../api/strapiMockApi'; // Import ProductData from your API definitions
 
-// Define a type for your product data (adjust as per your actual product structure)
-interface ProductData {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  rating: number;
-  // Add any other properties your ProductCard needs
-}
-
-interface ProductCarouselProps {
-  products: ProductData[]; // Array of product data to display in the carousel
+interface ProductSliderProps {
+  products: ProductData[]; // Array of product data to display in the slider
   cardsPerView?: number; // How many cards to show at once (e.g., 3 for desktop)
   autoPlayInterval?: number; // Interval for auto-play in milliseconds
   gap?: number; // Gap between cards in pixels
 }
 
-const ProductCarousel: React.FC<ProductCarouselProps> = ({
+const ProductSlider: React.FC<ProductSliderProps> = ({
   products,
   cardsPerView = 3, // Default to showing 3 cards
   autoPlayInterval = 3000, // Default to 3 seconds
@@ -38,34 +29,38 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Calculate card width and total item width dynamically
-  // Based on your original ProductCard width: 312px
-  const cardWidth = 312;
+  const cardWidth = 312; // Based on your ProductCard's fixed width
   const totalItemWidth = cardWidth + gap; // Width of one card plus its gap
 
   useEffect(() => {
     if (duplicatedProducts.length === 0) return;
 
     const startAutoPlay = () => {
+      // Clear any existing interval before starting a new one
+      if (slideTimeoutRef.current) {
+        clearInterval(slideTimeoutRef.current);
+      }
+
       slideTimeoutRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => {
-          // If we are at the beginning of the duplicated items, instantly jump back
-          // to the real start (index 0) without animation, then proceed.
+          // If we are at the end of the real products (and about to show a duplicate)
           if (prevIndex >= products.length) {
-            // First, jump visually without transition
+            // Instantly jump visually back to the very first real product (index 0)
             if (carouselRef.current) {
-              carouselRef.current.style.transition = 'none';
+              carouselRef.current.style.transition = 'none'; // Disable transition for the jump
               carouselRef.current.style.transform = `translateX(0px)`;
             }
-            // Then, reset index and continue animation
+            // After a tiny delay to allow the browser to render the "jump",
+            // set the index to 1 to animate to the second item.
             setTimeout(() => {
-              setCurrentIndex(1); // Move to the second item after reset
+              setCurrentIndex(1); // Move to the second item (first item after reset)
               if (carouselRef.current) {
-                carouselRef.current.style.transition = 'transform 0.5s ease-in-out';
+                carouselRef.current.style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
               }
             }, 50); // Small delay to allow reflow for transition: 'none'
-            return 0; // Return to 0 for the state, then next tick will move to 1
+            return 0; // Temporarily return to 0 for state, the timeout will then set it to 1
           } else {
-            return prevIndex + 1;
+            return prevIndex + 1; // Move to the next item normally
           }
         });
       }, autoPlayInterval);
@@ -81,48 +76,75 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   }, [duplicatedProducts.length, products.length, autoPlayInterval]);
 
 
-  // Effect to apply smooth transition after index changes
+  // Effect to apply smooth transition when currentIndex changes
   useEffect(() => {
     if (carouselRef.current) {
+      // Apply the transform based on the current index
       carouselRef.current.style.transform = `translateX(-${currentIndex * totalItemWidth}px)`;
-      carouselRef.current.style.transition = 'transform 0.5s ease-in-out'; // Smooth transition
+      // The transition property is managed within the autoPlay and navigation functions
+      // to allow for instant jumps when looping.
     }
   }, [currentIndex, totalItemWidth]);
 
 
-  // Manual Navigation (Optional, but good for user control)
+  // Manual Navigation
   const goToPrev = () => {
-    if (slideTimeoutRef.current) clearInterval(slideTimeoutRef.current); // Stop auto-play
+    // Clear auto-play when manual navigation occurs
+    if (slideTimeoutRef.current) {
+      clearInterval(slideTimeoutRef.current);
+      slideTimeoutRef.current = null;
+    }
     setCurrentIndex((prevIndex) => {
       if (prevIndex === 0) {
-        // If at the start, jump to the "end" of the real products + duplicates
-        const newIndex = duplicatedProducts.length - cardsPerView; // Go near the end of the total track
-         if (carouselRef.current) {
-              carouselRef.current.style.transition = 'none';
-              carouselRef.current.style.transform = `translateX(-${newIndex * totalItemWidth}px)`;
-         }
-         setTimeout(() => {
-            setCurrentIndex(newIndex -1); // Then move back one to make it seem continuous
-            if (carouselRef.current) {
-              carouselRef.current.style.transition = 'transform 0.5s ease-in-out';
-            }
-         }, 50);
-         return newIndex; // State will update after timeout
+        // If at the very first item (real index 0), jump to the "end" of the duplicated set
+        const jumpToIndex = products.length; // This is the index of the first duplicated item
+        if (carouselRef.current) {
+          carouselRef.current.style.transition = 'none'; // Disable transition for the jump
+          carouselRef.current.style.transform = `translateX(-${jumpToIndex * totalItemWidth}px)`;
+        }
+        // After a small delay, animate one step back to simulate a continuous loop
+        setTimeout(() => {
+          setCurrentIndex(jumpToIndex - 1); // Animate to the last real product
+          if (carouselRef.current) {
+            carouselRef.current.style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
+          }
+        }, 50);
+        return jumpToIndex; // Set state to the jumped position, then it will animate back
       }
-      return prevIndex - 1;
+      return prevIndex - 1; // Move to the previous item normally
     });
   };
 
   const goToNext = () => {
-    if (slideTimeoutRef.current) clearInterval(slideTimeoutRef.current); // Stop auto-play
-    setCurrentIndex((prevIndex) => (prevIndex + 1));
+    // Clear auto-play when manual navigation occurs
+    if (slideTimeoutRef.current) {
+      clearInterval(slideTimeoutRef.current);
+      slideTimeoutRef.current = null;
+    }
+    setCurrentIndex((prevIndex) => {
+      // If we are at the last real product and about to move into duplicates
+      if (prevIndex >= products.length) {
+        if (carouselRef.current) {
+          carouselRef.current.style.transition = 'none'; // Disable transition for instant jump
+          carouselRef.current.style.transform = `translateX(0px)`; // Jump to the start of real products
+        }
+        setTimeout(() => {
+          setCurrentIndex(1); // Then animate to the next item
+          if (carouselRef.current) {
+            carouselRef.current.style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
+          }
+        }, 50);
+        return 0; // Set state to 0, then the timeout will move it to 1
+      }
+      return prevIndex + 1; // Move to the next item normally
+    });
   };
 
 
   if (products.length === 0) {
     return (
       <div className="w-full h-96 bg-gray-200 flex items-center justify-center text-gray-500 rounded-md">
-        No products to display in the carousel.
+        No products to display in the slider.
       </div>
     );
   }
@@ -133,30 +155,25 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
         ref={carouselRef}
         className="flex"
         style={{
-          // Set fixed height for the carousel container to prevent jumps
-          height: '465px', // Height of a ProductCard
+          height: '465px', // Fixed height based on ProductCard's height
           gap: `${gap}px`, // Apply gap using CSS gap property
           transform: `translateX(-${currentIndex * totalItemWidth}px)`,
-          transition: 'transform 0.5s ease-in-out',
+          // Transition property is now controlled dynamically in useEffect and navigation functions
         }}
       >
         {duplicatedProducts.map((product, index) => (
-          // Use a unique key, especially important with duplicates
+          // Use a unique key for each item, especially with duplicates
+          // Combining product.id (which should be unique) with the index of the duplicated array
           <div key={`${product.id}-${index}`} style={{ flexShrink: 0, width: `${cardWidth}px` }}>
             <ProductCard
-              // Pass product data as props to the ProductCard
-              // Ensure ProductCard component is updated to accept these props
-              productName={product.name}
-              productDescription={product.description}
-              productImage={product.image}
-              productRating={product.rating}
-              productId={product.id}
+              // Pass the entire 'product' object to ProductCard
+              product={product}
             />
           </div>
         ))}
       </div>
 
-      {/* Optional: Navigation Buttons */}
+      {/* Navigation Buttons */}
       <button
         onClick={goToPrev}
         className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-75"
@@ -179,4 +196,4 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({
   );
 };
 
-export default ProductCarousel;
+export default ProductSlider;
