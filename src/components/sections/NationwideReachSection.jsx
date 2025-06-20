@@ -65,7 +65,7 @@ const NationwideReachSection = () => {
 
                     {/* Description */}
                     <p className="text-black text-lg font-normal font-['Inter'] leading-relaxed max-w-lg">
-                        From Jenjarom to the farthest corners of the globe, we're pedaling towards a world where everyone enjoys the ride. Our passion for bikes knows no borders – and neither do our dreams!
+                        From Jenjarom to the farthest corners of the Malaysia, we're pedaling towards a world where everyone enjoys the ride. Our passion for bikes knows no borders – and neither do our dreams!
                     </p>
                 </div>
             </div>

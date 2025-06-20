@@ -64,7 +64,7 @@ const RepairDeliveryPromo = () => {
           {/* "Book a Repair !" Button */}
           <a href="/contact" className="inline-block">
             <div className="w-[438px] h-[76px] bg-[#124970] rounded-[32px] flex items-center justify-center cursor-pointer">
-              <p className="text-white text-[36px] font-semibold font-['Inter']">Book a Repair !</p>
+              <p className="text-white text-[36px] font-semibold font-['Inter']">Contact Us !</p>
             </div>
           </a>
         </div>

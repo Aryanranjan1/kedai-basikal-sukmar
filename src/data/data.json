@@ -3,41 +3,40 @@
     {
       "id": 1,
       "attributes": {
-        "title": "Banner 1 - Explore Our Bikes",
+        "title": "Bicycle - Explore Our Bikes",
         "description": "High-quality bicycles for every adventure.",
         "imageUrl": "/images/banner/1.png",
-        "linkUrl": "/bicycle",
+        "linkUrl": "/bicycles",
         "altText": "Sleek modern bicycle on a scenic road."
       }
     },
     {
       "id": 2,
       "attributes": {
-        "title": "Banner 2 - City Cycling",
+        "title": "Electric - City Cycling",
         "description": "Perfect bikes for urban commutes.",
         "imageUrl": "/images/banner/2.png",
-        "linkUrl": "/bicycle",
-        "altText": "Person cycling through a city park."
+        "linkUrl": "/bicycles",
+        "altText": "Mordern electric bicycle"
       }
     },
     {
       "id": 3,
       "attributes": {
-        "title": "Banner 3 - Off-Road Adventures",
+        "title": "Adventure - Off-Road Adventures",
         "description": "Durable mountain bikes for rugged trails.",
         "imageUrl": "/images/banner/3.png",
-        "linkUrl": "/bicycle",
+        "linkUrl": "/bicycles",
         "altText": "Mountain bike on a dirt trail with mountains in background."
       }
     },
     {
       "id": 4,
       "attributes": {
-        "title": "Banner 4 - Family Fun Rides",
-        "description": "Bicycles for all ages.",
+        "title": "Family - Family Fun Rides",
         "description": "Bicycles for all ages.",
         "imageUrl": "/images/banner/4.png",
-        "linkUrl": "/bicycle",
+        "linkUrl": "/bicycles",
         "altText": "Happy family riding bicycles together."
       }
     }

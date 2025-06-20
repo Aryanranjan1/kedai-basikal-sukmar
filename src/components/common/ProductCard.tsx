@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const {
     productName,
     description,
-    price,
+    // REMOVED: price,
     productImage, // This is the image object from Strapi
     slug,
     rating // Assuming you want to use the actual rating
@@ -111,23 +111,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {descriptionSnippet}
       </div>
 
-      {/* Price */}
-      <div
-        style={{
-          left: '22px',
-          top: '350px',
-          position: 'absolute',
-          color: '#FEC60E',
-          fontSize: '18px',
-          fontFamily: 'Outfit',
-          fontWeight: '700',
-        }}
-      >
-        {typeof price === 'number' ? `RM ${price.toFixed(2)}` : price}
-      </div>
 
       {/* Dynamic Star Rating based on product.attributes.rating */}
-      <div style={{ display: 'flex', position: 'absolute', left: '22px', top: '380px' }}>
+      <div style={{ display: 'flex', position: 'absolute', left: '22px', top: '350px' /* Adjusted top position */ }}>
         {[...Array(5)].map((_, i) => (
           <span key={i} style={{ color: i < rating ? '#FEC60E' : 'gray', fontSize: '18px', marginRight: '4px' }}>★</span>
         ))}
@@ -142,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             width: '222px',
             height: '39px',
             left: '45px',
-            top: '410px',
+            top: '380px' /* Adjusted top position */,
             position: 'absolute',
             background: '#124970',
             borderRadius: '14px',

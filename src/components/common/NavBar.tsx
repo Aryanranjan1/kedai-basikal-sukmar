@@ -82,10 +82,10 @@ const NavBar = () => {
 
           {/* Wishlist CTA (Desktop) */}
           <Link
-            href="/wishlist"
+            href="/bicycles"
             className="bg-[#124970] text-white text-xl font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap"
           >
-            Wishlist
+            Vist us
           </Link>
         </div>
 
@@ -140,11 +140,11 @@ const NavBar = () => {
 
             {/* Wishlist CTA (Mobile) */}
             <Link
-              href="/wishlist"
+              href="/bicycles"
               className="mt-4 block text-center bg-[#124970] text-white text-xl font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Wishlist
+              visit us
             </Link>
           </div>
         </div>

@@ -97,39 +97,39 @@ const Footer = () => {
             ></iframe>
           </div>
 
-          {/* Social Media Icons */}
-          <div className="flex space-x-[16px] mt-[16px]">
-            {/* Facebook */}
-            <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <Image 
-                src="/images/facebook.svg" 
-                alt="Facebook" 
-                width={32} // Explicit width
-                height={32} // Explicit height
-                className="object-contain" 
-              />
-            </a>
-            {/* Twitter */}
-            <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <Image 
-                src="/images/x.svg" 
-                alt="Twitter" 
-                width={32} // Explicit width
-                height={32} // Explicit height
-                className="object-contain" 
-              />
-            </a>
-            {/* Instagram */}
-            <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
-              <Image 
-                src="/images/instagram.svg" 
-                alt="Instagram" 
-                width={32} // Explicit width
-                height={32} // Explicit height
-                className="object-contain" 
-              />
-            </a>
-          </div>
+         {/* Social Media Icons */}
+<div className="flex space-x-[16px] mt-[16px]">
+  {/* Facebook */}
+  <a href="https://www.facebook.com/kedaibasikalsukmar/?locale=ms_MY" target="_blank" rel="noopener noreferrer" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
+    <Image
+      src="/images/facebook.svg"
+      alt="Facebook"
+      width={32} // Explicit width
+      height={32} // Explicit height
+      className="object-contain"
+    />
+  </a>
+  {/* Website (formerly Twitter) */}
+  <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
+    <Image
+      src="/images/globe.svg" // Changed from x.svg to a placeholder for a globe/website icon
+      alt="Website" // Changed alt text
+      width={32} // Explicit width
+      height={32} // Explicit height
+      className="object-contain"
+    />
+  </a>
+  {/* Instagram */}
+  <a href="https://www.instagram.com/kedaibasikalsukmar/" target="_blank" rel="noopener noreferrer" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
+    <Image
+      src="/images/instagram.svg"
+      alt="Instagram"
+      width={32} // Explicit width
+      height={32} // Explicit height
+      className="object-contain"
+    />
+  </a>
+</div>
         </div>
       </div>
 

@@ -13,7 +13,7 @@ import WhyChooseCyclingSection from '@/components/sections/WhyChooseCyclingSecti
 import { fetchProductBySlug } from '@/api/strapiMockApi';
 import type { ProductData } from '@/api/strapiMockApi';
 
-import { useWishlistStatus } from '@/hooks/useWishlist';
+// REMOVED: import { useWishlistStatus } from '@/hooks/useWishlist';
 
 import ProductImageGallery from './components/ProductImageGallery';
 
@@ -24,9 +24,8 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Convert product.id to a string before passing it to useWishlistStatus
-  // Use optional chaining (?.) and nullish coalescing (??) for safety
-  const { isWishlisted, toggleWishlist } = useWishlistStatus(String(product?.id ?? ''));
+  // REMOVED: Wishlist related state and hook usage
+  // const { isWishlisted, toggleWishlist } = useWishlistStatus(String(product?.id ?? ''));
 
   useEffect(() => {
     if (!params || typeof params.productId !== 'string') {
@@ -105,9 +104,7 @@ export default function ProductPage() {
               {product.attributes.productName}
             </h1>
             <p className="text-gray-700 text-lg mb-4">{product.attributes.description}</p>
-            <p className="text-2xl font-semibold text-blue-600 mb-4">
-              RM {product.attributes.price.toFixed(2)}
-            </p>
+        
             <div className="flex items-center mb-4">
               <span className="text-yellow-500 mr-2">
                 {'★'.repeat(Math.round(product.attributes.rating))}
@@ -164,17 +161,7 @@ export default function ProductPage() {
                 </div>
               )}
 
-            {/* Wishlist Button */}
-            <button
-              onClick={() => toggleWishlist(product)}
-              className={`px-6 py-3 rounded-lg transition-colors ${
-                isWishlisted
-                  ? 'bg-red-500 text-white hover:bg-red-600'
-                  : 'bg-blue-500 text-white hover:bg-blue-600'
-              }`}
-            >
-              {isWishlisted ? '💔 Remove from Wishlist' : '❤️ Add to Wishlist'}
-            </button>
+         
           </div>
         </section>
 

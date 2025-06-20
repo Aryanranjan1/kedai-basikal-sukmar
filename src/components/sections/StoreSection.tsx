@@ -1,4 +1,3 @@
-// src/components/StoreSection.tsx
 'use client';
 import '../../styles/pagination.css'; // Make sure this path is correct
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
@@ -22,17 +21,18 @@ const StoreSection: React.FC = () => {
     const [products, setProducts] = useState<ProductData[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(0); // 0-indexed for ReactPaginate
     const [pageCount, setPageCount] = useState<number>(0);
-    const [totalProducts, setTotalProducts] = useState<number>(0); // Kept and will be used
+    const [totalProducts, setTotalProducts] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null); // Kept and will be used
+    const [error, setError] = useState<string | null>(null);
 
     // Keep track of the actual search query being used for filtering
     const [activeSearchQuery, setActiveSearchQuery] = useState(initialSearchQuery);
 
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 3000]);
-    // Added for input control
-    const [minPriceInput, setMinPriceInput] = useState<string>('0');
-    const [maxPriceInput, setMaxPriceInput] = useState<string>('3000');
+    // REMOVED: Price range state
+    // const [priceRange, setPriceRange] = useState<[number, number]>([0, 3000]);
+    // REMOVED: Price input control states
+    // const [minPriceInput, setMinPriceInput] = useState<string>('0');
+    // const [maxPriceInput, setMaxPriceInput] = useState<string>('3000');
 
 
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -87,7 +87,7 @@ const StoreSection: React.FC = () => {
                     // Client-side relevance sorting if an active search query is present
                     if (activeSearchQuery) {
                         const searchKeywords = activeSearchQuery.toLowerCase().split(' ').filter(k => k.length > 0);
-                        
+
                         fetchedProducts.sort((a, b) => {
                             const relevanceA = calculateRelevance(a.attributes.productName, searchKeywords);
                             const relevanceB = calculateRelevance(b.attributes.productName, searchKeywords);
@@ -98,11 +98,15 @@ const StoreSection: React.FC = () => {
                             }
 
                             // Secondary sort: by user's selected sort option if relevances are equal
+                            // REMOVED: Price-based sorting
+                            /*
                             if (selectedSort === 'price:asc') {
                                 return a.attributes.price - b.attributes.price;
                             } else if (selectedSort === 'price:desc') {
                                 return b.attributes.price - a.attributes.price;
-                            } else if (selectedSort === 'productName:asc') {
+                            } else
+                            */
+                            if (selectedSort === 'productName:asc') {
                                 return a.attributes.productName.localeCompare(b.attributes.productName);
                             } else if (selectedSort === 'productName:desc') {
                                 return b.attributes.productName.localeCompare(a.attributes.productName);
@@ -138,8 +142,9 @@ const StoreSection: React.FC = () => {
 
     const buildSearchParams = useCallback(() => {
         const params = new URLSearchParams();
-        if (priceRange[0] > 0) params.set('filters[price][$gte]', priceRange[0].toString());
-        if (priceRange[1] < 3000) params.set('filters[price][$lte]', priceRange[1].toString());
+        // REMOVED: Price range parameters
+        // if (priceRange[0] > 0) params.set('filters[price][$gte]', priceRange[0].toString());
+        // if (priceRange[1] < 3000) params.set('filters[price][$lte]', priceRange[1].toString());
         if (selectedBrands.length > 0) selectedBrands.forEach(brand => params.append('filters[brand][$in]', brand));
         if (selectedColors.length > 0) selectedColors.forEach(color => params.append('filters[color][$in]', color));
         if (selectedAgeRanges.length > 0) selectedAgeRanges.forEach(range => params.append('filters[ageRange][$in]', range));
@@ -159,7 +164,7 @@ const StoreSection: React.FC = () => {
 
 
         return params;
-    }, [priceRange, selectedBrands, selectedColors, selectedAgeRanges, selectedGender, selectedTypes, activeSearchQuery, currentPage]); // activeSearchQuery and currentPage are now dependencies
+    }, [selectedBrands, selectedColors, selectedAgeRanges, selectedGender, selectedTypes, activeSearchQuery, currentPage]); // activeSearchQuery and currentPage are now dependencies
 
 
     // Effect to fetch products when page, filters, sort, or search query changes
@@ -191,7 +196,8 @@ const StoreSection: React.FC = () => {
         fetchOptions();
     }, []); // Run once on component mount
 
-    // Handlers for price input fields (no change to UI, just internal state)
+    // REMOVED: Price input handlers
+    /*
     const handleMinPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMinPriceInput(e.target.value);
     };
@@ -208,6 +214,7 @@ const StoreSection: React.FC = () => {
         setPriceRange([newMin, newMax]);
         setCurrentPage(0); // Reset page on filter change
     };
+    */
 
     const handleCheckboxChange = (
         setter: React.Dispatch<React.SetStateAction<string[]>>,
@@ -235,9 +242,6 @@ const StoreSection: React.FC = () => {
     };
 
     const clearAllFilters = () => {
-        setPriceRange([0, 3000]);
-        setMinPriceInput('0');
-        setMaxPriceInput('3000');
         setSelectedBrands([]);
         setSelectedColors([]);
         setSelectedAgeRanges([]);
@@ -326,37 +330,6 @@ const StoreSection: React.FC = () => {
                             </button>
                         </div>
                     )}
-
-                    {/* Price Range Filter */}
-                    <div style={{ marginBottom: '24px' }}>
-                        <h4 style={{ fontWeight: '500', marginBottom: '8px' }}>Price Range</h4>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <input
-                                type="number"
-                                name="minPrice"
-                                value={minPriceInput}
-                                onChange={handleMinPriceInputChange}
-                                onBlur={handlePriceInputBlur} // Apply filter on blur
-                                style={{ width: '50%', padding: '8px', border: '1px solid #ccc', borderRadius: '6px' }}
-                                placeholder="Min"
-                                min="0"
-                            />
-                            <span>-</span>
-                            <input
-                                type="number"
-                                name="maxPrice"
-                                value={maxPriceInput}
-                                onChange={handleMaxPriceInputChange}
-                                onBlur={handlePriceInputBlur} // Apply filter on blur
-                                style={{ width: '50%', padding: '8px', border: '1px solid #ccc', borderRadius: '6px' }}
-                                placeholder="Max"
-                                max="3000"
-                            />
-                        </div>
-                        <p style={{ fontSize: '14px', color: '#4a5568', marginTop: '4px' }}>
-                            Current: ${priceRange[0]} - ${priceRange[1]}
-                        </p>
-                    </div>
 
                     {/* Brand Filter */}
                     <div style={{ marginBottom: '24px' }}>
@@ -484,7 +457,7 @@ const StoreSection: React.FC = () => {
                         <p style={{ fontWeight: '500', color: '#2d3748' }}>
                             {loading ? "Loading..." : `${products.length} of ${totalProducts} products found`}
                         </p>
-                        <label htmlFor="sort-by" style={{ marginRight: '8px', fontWeight: '500', color: '#2d3748' }}>Sort By:</label>
+                        <label htmlFor="sort-by" style={{ marginRight: '-580px', fontWeight: '500', color: '#2d3748' }}>Sort By:</label>
                         <select
                             id="sort-by"
                             value={selectedSort}
@@ -492,8 +465,11 @@ const StoreSection: React.FC = () => {
                             style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '12px', color: '#4a5568' }}
                         >
                             <option value="">Default</option>
+                            {/* REMOVED: Price sorting options */}
+                            {/*
                             <option value="price:asc">Price: Low to High</option>
                             <option value="price:desc">Price: High to Low</option>
+                            */}
                             <option value="productName:asc">Name: A-Z</option>
                             <option value="productName:desc">Name: Z-A</option>
                             <option value="rating:desc">Rating: High to Low</option>
@@ -509,7 +485,8 @@ const StoreSection: React.FC = () => {
                                     <div style={{ padding: '16px' }}>
                                         <div style={{ height: '16px', background: '#cbd5e0', borderRadius: '4px', width: '75%', marginBottom: '8px' }}></div>
                                         <div style={{ height: '12px', background: '#cbd5e0', borderRadius: '4px', width: '50%' }}></div>
-                                        <div style={{ height: '16px', background: '#cbd5e0', borderRadius: '4px', width: '25%', marginTop: '16px' }}></div>
+                                        {/* REMOVED: Price placeholder in loading state */}
+                                        {/* <div style={{ height: '16px', background: '#cbd5e0', borderRadius: '4px', width: '25%', marginTop: '16px' }}></div> */}
                                     </div>
                                 </div>
                             ))}

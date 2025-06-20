@@ -68,7 +68,7 @@ const AboutSection: React.FC = () => {
                     <span style={{color: '#124970', fontSize: 64, fontFamily: 'Outfit', fontWeight: '500', wordWrap: 'break-word'}}>Journey,</span>
                 </div>
                 <div style={{width: 509, left: 109, top: 288, position: 'absolute', color: 'rgba(0, 0, 0, 0.70)', fontSize: 48, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word'}}>is our passion&nbsp; .....</div>
-                
+
                 {/* Image 1: public/images/close-up-bike-nature-removebg.png */}
                 <Image
                     src="/images/close-up-bike-nature-removebg.png"
@@ -98,10 +98,10 @@ const AboutSection: React.FC = () => {
                     <span style={{color: '#124970', fontSize: 48, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word'}}>Passion</span>
                     <span style={{color: 'black', fontSize: 48, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word'}}>.</span>
                 </div>
-                
-                {/* Image 2: public/images/happy_customer.jpg */}
+
+                {/* Image 2: public/images/happy_customer.png - UPDATED SRC */}
                 <Image
-                    src="/images/happy_customer.jpg"
+                    src="/images/happy_customer copy.png" // Changed from .jpg to .png
                     alt="Happy Customer"
                     width={1200}
                     height={800}

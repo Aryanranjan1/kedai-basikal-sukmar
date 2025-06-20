@@ -78,9 +78,9 @@ const ServicesSection = () => {
               title2="Repair"
             />
             <ServiceCard
-              icon={<img src="/images/9004685_location_map_pin_navigation_marker_icon.svg" alt="Delivery Icon" className="w-6 h-6" />}
-              title1="Free"
-              title2="Delivery"
+              icon={<img src="/images/9004685_location_map_pin_navigation_marker_icon.svg" alt="location Icon" className="w-6 h-6" />}
+              title1="Nation"
+              title2="wide"
             />
             <ServiceCard
               icon={<img src="/images/gear.svg" alt="Gear Icon" className="w-6 h-6" />}

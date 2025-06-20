@@ -69,7 +69,7 @@ const HeroSection = () => {
           height: 381,
           position: 'absolute',
           left: 99,
-          top: 150,
+          top: 200,
           zIndex: 2,
         }}
       >
@@ -137,7 +137,7 @@ const HeroSection = () => {
         <div
           style={{
             position: 'absolute',
-            top: 213,
+            top: 233,
             width: 510,
             color: 'black',
             fontSize: 19,
@@ -153,7 +153,7 @@ const HeroSection = () => {
         <div
           style={{
             position: 'absolute',
-            top: 316,
+            top: 356,
             display: 'flex',
             gap: 16,
           }}
@@ -194,78 +194,11 @@ const HeroSection = () => {
                 display: 'inline-block', // Important for Link components to apply padding correctly
               }}
             >
-              Book Repair
+              Contact Us
             </div>
           </Link>
         </div>
       </div>
-
-      {/* Partners Section */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 100,
-          top: 600,
-        }}
-      >
-        <div
-          style={{
-            color: '#124970',
-            fontSize: 20,
-            fontFamily: 'Inter',
-            fontWeight: 500,
-            marginBottom: 8,
-          }}
-        >
-          Our Partners
-        </div>
-        <div
-          style={{
-            width: 112,
-            height: 1,
-            background: '#124970',
-            marginBottom: 24,
-          }}
-        ></div>
-      </div>
-
-      {/* Partner Logos */}
-      <img
-        src="/images/Screenshot_2025-06-05_195744-removebg-preview.png"
-        alt="Partner Logo 1"
-        style={{
-          position: 'absolute',
-          width: 126.04,
-          height: 25,
-          left: 99,
-          top: 700,
-          opacity: 0.7,
-        }}
-      />
-      <img
-        src="/images/Screenshot_2025-06-05_200228-removebg-preview.png"
-        alt="Partner Logo 2"
-        style={{
-          position: 'absolute',
-          width: 129.73,
-          height: 46,
-          left: 255,
-          top: 700,
-          opacity: 0.7,
-        }}
-      />
-      <img
-        src="/images/Screenshot_2025-06-05_195806-removebg-preview.png"
-        alt="Partner Logo 3"
-        style={{
-          position: 'absolute',
-          width: 85.42,
-          height: 25,
-          left: 415,
-          top: 700,
-          opacity: 0.7,
-        }}
-      />
     </div>
   );
 };
