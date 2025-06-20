@@ -90,7 +90,7 @@ export default function RepairServiceHero() {
             {/* Service Cards Grid */}
             <div className="grid grid-cols-2 gap-6">
               <ServiceCard
-                icon={<Image src="/images/refresh.png" alt="Tyre Repair Icon" width={24} height={24} />}
+                icon={<Image src="/images/tyre.png" alt="Tyre Repair Icon" width={24} height={24} />}
                 title1="Tyre"
                 title2="Repair"
               />
@@ -100,7 +100,7 @@ export default function RepairServiceHero() {
                 title2="Repair"
               />
               <ServiceCard
-                icon={<Image src="/images/tyre.png" alt="Part Change Icon" width={24} height={24} />}
+                icon={<Image src="/images/refresh.png" alt="Part Change Icon" width={24} height={24} />}
                 title1="Part"
                 title2="Change"
               />
