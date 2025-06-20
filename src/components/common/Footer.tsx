@@ -112,7 +112,7 @@ const Footer = () => {
   {/* Website (formerly Twitter) */}
   <a href="#" className="w-[56px] h-[56px] bg-[#124970] rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity">
     <Image
-      src="/images/globe.svg" // Changed from x.svg to a placeholder for a globe/website icon
+      src="/images/326663_language_web_icon.svg" 
       alt="Website" // Changed alt text
       width={32} // Explicit width
       height={32} // Explicit height
