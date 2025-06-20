@@ -76,7 +76,7 @@ const ContactSection: React.FC = () => {
             {/* Left Section - Contact Info */}
             <div style={{ left: 100, top: 82, position: 'absolute', color: 'black', fontSize: 96, fontFamily: 'Outfit', fontWeight: '300', wordWrap: 'break-word' }}>Reach</div>
             <div style={{ left: 377, top: 82, position: 'absolute', color: '#124970', fontSize: 96, fontFamily: 'Outfit', fontWeight: '500', wordWrap: 'break-word' }}>Us</div>
-            <div style={{ left: 100, top: 486, position: 'absolute', color: 'rgba(0, 0, 0, 0.70)', fontSize: 32, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }}>+60 12-345 6789<br />+60 11-2233 4455<br />kedaibasikalsukmar@gmail.com</div>
+            <div style={{ left: 100, top: 486, position: 'absolute', color: 'rgba(0, 0, 0, 0.70)', fontSize: 32, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }}>@kedaibasikalsukmar<br />kedaibasikalsukmar@gmail.com</div>
             <div style={{ width: 317, left: 100, top: 252, position: 'absolute', color: 'rgba(0, 0, 0, 0.70)', fontSize: 32, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }}>No3, Jalan 3/2, Taman Seri Jaromas,<br /> 42600 Jenjarom, Selangor</div>
 
             {/* Google Maps Embed */}
