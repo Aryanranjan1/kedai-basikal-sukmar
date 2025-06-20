@@ -114,7 +114,7 @@ const ContactSection: React.FC = () => {
                     </div>
 
                     <div style={{ marginBottom: '40px' }}>
-                        <label htmlFor="number" style={{ left: 0, top: 0, position: 'relative', color: 'white', fontSize: 32, fontFamily: 'Outfit', fontWeight: '600', wordWrap: 'break-word', display: 'block', marginBottom: '10px' }}>Your Number</label>
+                        <label htmlFor="number" style={{ left: 0, top: 0, position: 'relative', color: 'white', fontSize: 32, fontFamily: 'Outfit', fontWeight: '600', wordWrap: 'break-word', display: 'block', marginBottom: '10px' }}>Your contact</label>
                         <div style={{ width: 556, height: 74, background: 'white', overflow: 'hidden', borderRadius: 12 }}>
                             <input
                                 type="text"
@@ -122,7 +122,7 @@ const ContactSection: React.FC = () => {
                                 name="number"
                                 value={formData.number}
                                 onChange={handleChange}
-                                placeholder="enter your number here"
+                                placeholder="enter your contact here"
                                 style={{
                                     width: '100%', height: '100%', border: 'none', background: 'transparent',
                                     paddingLeft: '21px', fontSize: 32, fontFamily: 'Outfit', fontWeight: '600',
