@@ -60,8 +60,7 @@ const Footer = () => {
           <div>
             <h4 className="text-[16px] sm:text-[18px] font-semibold font-['Outfit'] text-black">Contact Details:</h4>
             <p className="text-[14px] sm:text-[16px] text-gray-600 font-['Outfit'] mt-[4px]">
-              +60 12-345 6789<br />
-              +60 11-2233 4455<br />
+              @kedaibasikalsukmar<br />
               kedaibasikalsukmar@gmail.com
             </p>
           </div>
